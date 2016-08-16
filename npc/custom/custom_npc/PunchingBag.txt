@@ -1,0 +1,12 @@
+-	script	Punching Bag	-1,{
+OnInit:
+OnDummyKill:
+	monster "prontera",173,207,"Punching Bag",1905,1,"Punching Bag::OnDummyKill";
+	monster "prontera",180,207,"Punching Bag",1905,1,"Punching Bag::OnDummyKill";
+	monster "prontera",173,200,"Punching Bag",1905,1,"Punching Bag::OnDummyKill";
+	monster "prontera",180,200,"Punching Bag",1905,1,"Punching Bag::OnDummyKill";
+	end;
+OnPCAttackEvent:
+	message strcharinfo(0), "You have dealt "+ @damage +" damage to Punching Bag";
+	end;
+}

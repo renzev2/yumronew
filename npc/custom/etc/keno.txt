@@ -1,0 +1,1596 @@
+prontera,166,198,5	script	Klotterygenerator	817,{
+OnInit:
+waitingroom "Let's Play Keno Lotto",0;
+set $KENO_TicketPrice,10; // TICKET COST
+set $KENO_Prize_Money,30000000; // JACKPOT AMOUNT
+if ($LKID == 0) goto KENO_GenID;
+end;
+
+//Modify for own time
+//add any other HOURS
+OnHour00:
+OnHour01:
+OnHour02:
+OnHour03:
+OnHour04:
+OnHour05:
+OnHour06:
+OnHour07:
+OnHour08:
+OnHour09:
+OnHour10:
+OnHour11:
+OnHour12:
+OnHour13:
+OnHour14:
+OnHour15:
+OnHour16:
+OnHour17:
+OnHour18:
+OnHour19:
+OnHour20:
+OnHour21:
+OnHour22:
+OnHour23:
+OnHour24:
+//-------------------
+// CHECKS IF LOTTERY IS RIGGED
+if ($KENO_Rigged == 1) goto KENO_Rigged_Draw;
+// GENERATES RANDOM NUMBERS 1-80
+KPick1:
+set $LkW1,rand (1,80);
+
+KPick2:
+set $LkW2,rand (1,80);
+if ($LkW2 == $LkW1) goto KPick2;
+
+KPick3:
+set $LkW3,rand (1,80);
+if ($LkW3 == $LkW2) goto KPick3;
+if ($LkW3 == $LkW1) goto KPick3;
+
+KPick4:
+set $LkW4,rand (1,80);
+if ($LkW4 == $LkW2) goto KPick4;
+if ($LkW4 == $LkW1) goto KPick4;
+if ($LkW4 == $LkW3) goto KPick4;
+
+KPick5:
+set $LkW5,rand (1,80);
+if ($LkW5 == $LkW1) goto KPick5;
+if ($LkW5 == $LkW2) goto KPick5;
+if ($LkW5 == $LkW3) goto KPick5;
+if ($LkW5 == $LkW4) goto KPick5;
+
+KPick6:
+set $LkW6,rand (1,80);
+if ($LkW6 == $LkW1) goto KPick6;
+if ($LkW6 == $LkW2) goto KPick6;
+if ($LkW6 == $LkW3) goto KPick6;
+if ($LkW6 == $LkW4) goto KPick6;
+if ($LkW6 == $LkW5) goto KPick6;
+
+KPick7:
+set $LkW7,rand (1,80);
+if ($LkW7 == $LkW1) goto KPick7;
+if ($LkW7 == $LkW2) goto KPick7;
+if ($LkW7 == $LkW3) goto KPick7;
+if ($LkW7 == $LkW4) goto KPick7;
+if ($LkW7 == $LkW5) goto KPick7;
+if ($LkW7 == $LkW6) goto KPick7;
+
+KPick8:
+set $LkW8,rand (1,80);
+if ($LkW8 == $LkW1) goto KPick8;
+if ($LkW8 == $LkW2) goto KPick8;
+if ($LkW8 == $LkW3) goto KPick8;
+if ($LkW8 == $LkW4) goto KPick8;
+if ($LkW8 == $LkW5) goto KPick8;
+if ($LkW8 == $LkW6) goto KPick8;
+if ($LkW8 == $LkW7) goto KPick8;
+
+KPick9:
+set $LkW9,rand (1,80);
+if ($LkW9 == $LkW1) goto KPick9;
+if ($LkW9 == $LkW2) goto KPick9;
+if ($LkW9 == $LkW3) goto KPick9;
+if ($LkW9 == $LkW4) goto KPick9;
+if ($LkW9 == $LkW5) goto KPick9;
+if ($LkW9 == $LkW6) goto KPick9;
+if ($LkW9 == $LkW7) goto KPick9;
+if ($LkW9 == $LkW8) goto KPick9;
+
+KPick10:
+set $LkW10,rand (1,80);
+if ($LkW10 == $LkW1) goto KPick10;
+if ($LkW10 == $LkW2) goto KPick10;
+if ($LkW10 == $LkW3) goto KPick10;
+if ($LkW10 == $LkW4) goto KPick10;
+if ($LkW10 == $LkW5) goto KPick10;
+if ($LkW10 == $LkW6) goto KPick10;
+if ($LkW10 == $LkW7) goto KPick10;
+if ($LkW10 == $LkW8) goto KPick10;
+if ($LkW10 == $LkW9) goto KPick10;
+
+KPick11:
+set $LkW11,rand (1,80);
+if ($LkW11 == $LkW1) goto KPick11;
+if ($LkW11 == $LkW2) goto KPick11;
+if ($LkW11 == $LkW3) goto KPick11;
+if ($LkW11 == $LkW4) goto KPick11;
+if ($LkW11 == $LkW5) goto KPick11;
+if ($LkW11 == $LkW6) goto KPick11;
+if ($LkW11 == $LkW7) goto KPick11;
+if ($LkW11 == $LkW8) goto KPick11;
+if ($LkW11 == $LkW9) goto KPick11;
+if ($LkW11 == $LkW10) goto KPick11;
+
+KPick12:
+set $LkW12,rand (1,80);
+if ($LkW12 == $LkW1) goto KPick12;
+if ($LkW12 == $LkW2) goto KPick12;
+if ($LkW12 == $LkW3) goto KPick12;
+if ($LkW12 == $LkW4) goto KPick12;
+if ($LkW12 == $LkW5) goto KPick12;
+if ($LkW12 == $LkW6) goto KPick12;
+if ($LkW12 == $LkW7) goto KPick12;
+if ($LkW12 == $LkW8) goto KPick12;
+if ($LkW12 == $LkW9) goto KPick12;
+if ($LkW12 == $LkW10) goto KPick12;
+if ($LkW12 == $LkW11) goto KPick12;
+
+KPick13:
+set $LkW13,rand (1,80);
+if ($LkW13 == $LkW1) goto KPick13;
+if ($LkW13 == $LkW2) goto KPick13;
+if ($LkW13 == $LkW3) goto KPick13;
+if ($LkW13 == $LkW4) goto KPick13;
+if ($LkW13 == $LkW5) goto KPick13;
+if ($LkW13 == $LkW6) goto KPick13;
+if ($LkW13 == $LkW7) goto KPick13;
+if ($LkW13 == $LkW8) goto KPick13;
+if ($LkW13 == $LkW9) goto KPick13;
+if ($LkW13 == $LkW10) goto KPick13;
+if ($LkW13 == $LkW11) goto KPick13;
+if ($LkW13 == $LkW12) goto KPick13;
+
+KPick14:
+set $LkW14,rand (1,80);
+if ($LkW14 == $LkW1) goto KPick14;
+if ($LkW14 == $LkW2) goto KPick14;
+if ($LkW14 == $LkW3) goto KPick14;
+if ($LkW14 == $LkW4) goto KPick14;
+if ($LkW14 == $LkW5) goto KPick14;
+if ($LkW14 == $LkW6) goto KPick14;
+if ($LkW14 == $LkW7) goto KPick14;
+if ($LkW14 == $LkW8) goto KPick14;
+if ($LkW14 == $LkW9) goto KPick14;
+if ($LkW14 == $LkW10) goto KPick14;
+if ($LkW14 == $LkW11) goto KPick14;
+if ($LkW14 == $LkW12) goto KPick14;
+if ($LkW14 == $LkW13) goto KPick14;
+
+KPick15:
+set $LkW15,rand (1,80);
+if ($LkW15 == $LkW1) goto KPick15;
+if ($LkW15 == $LkW2) goto KPick15;
+if ($LkW15 == $LkW3) goto KPick15;
+if ($LkW15 == $LkW4) goto KPick15;
+if ($LkW15 == $LkW5) goto KPick15;
+if ($LkW15 == $LkW6) goto KPick15;
+if ($LkW15 == $LkW7) goto KPick15;
+if ($LkW15 == $LkW8) goto KPick15;
+if ($LkW15 == $LkW9) goto KPick15;
+if ($LkW15 == $LkW10) goto KPick15;
+if ($LkW15 == $LkW11) goto KPick15;
+if ($LkW15 == $LkW12) goto KPick15;
+if ($LkW15 == $LkW13) goto KPick15;
+if ($LkW15 == $LkW14) goto KPick15;
+
+KPick16:
+set $LkW16,rand (1,80);
+if ($LkW16 == $LkW1) goto KPick16;
+if ($LkW16 == $LkW2) goto KPick16;
+if ($LkW16 == $LkW3) goto KPick16;
+if ($LkW16 == $LkW4) goto KPick16;
+if ($LkW16 == $LkW5) goto KPick16;
+if ($LkW16 == $LkW6) goto KPick16;
+if ($LkW16 == $LkW7) goto KPick16;
+if ($LkW16 == $LkW8) goto KPick16;
+if ($LkW16 == $LkW9) goto KPick16;
+if ($LkW16 == $LkW10) goto KPick16;
+if ($LkW16 == $LkW11) goto KPick16;
+if ($LkW16 == $LkW12) goto KPick16;
+if ($LkW16 == $LkW13) goto KPick16;
+if ($LkW16 == $LkW14) goto KPick16;
+if ($LkW16 == $LkW15) goto KPick16;
+
+KPick17:
+set $LkW17,rand (1,80);
+if ($LkW17 == $LkW1) goto KPick17;
+if ($LkW17 == $LkW2) goto KPick17;
+if ($LkW17 == $LkW3) goto KPick17;
+if ($LkW17 == $LkW4) goto KPick17;
+if ($LkW17 == $LkW5) goto KPick17;
+if ($LkW17 == $LkW6) goto KPick17;
+if ($LkW17 == $LkW7) goto KPick17;
+if ($LkW17 == $LkW8) goto KPick17;
+if ($LkW17 == $LkW9) goto KPick17;
+if ($LkW17 == $LkW10) goto KPick17;
+if ($LkW17 == $LkW11) goto KPick17;
+if ($LkW17 == $LkW12) goto KPick17;
+if ($LkW17 == $LkW13) goto KPick17;
+if ($LkW17 == $LkW14) goto KPick17;
+if ($LkW17 == $LkW15) goto KPick17;
+if ($LkW17 == $LkW16) goto KPick17;
+
+KPick18:
+set $LkW18,rand (1,80);
+if ($LkW18 == $LkW1) goto KPick18;
+if ($LkW18== $LkW2) goto KPick18;
+if ($LkW18== $LkW3) goto KPick18;
+if ($LkW18== $LkW4) goto KPick18;
+if ($LkW18== $LkW5) goto KPick18;
+if ($LkW18== $LkW6) goto KPick18;
+if ($LkW18== $LkW7) goto KPick18;
+if ($LkW18== $LkW8) goto KPick18;
+if ($LkW18== $LkW9) goto KPick18;
+if ($LkW18== $LkW10) goto KPick18;
+if ($LkW18== $LkW11) goto KPick18;
+if ($LkW18== $LkW12) goto KPick18;
+if ($LkW18== $LkW13) goto KPick18;
+if ($LkW18== $LkW14) goto KPick18;
+if ($LkW18== $LkW15) goto KPick18;
+if ($LkW18== $LkW16) goto KPick18;
+if ($LkW18== $LkW17) goto KPick18;
+
+KPick19:
+set $LkW19,rand (1,80);
+if ($LkW19 == $LkW1) goto KPick19;
+if ($LkW19== $LkW2) goto KPick19;
+if ($LkW19== $LkW3) goto KPick19;
+if ($LkW19== $LkW4) goto KPick19;
+if ($LkW19== $LkW5) goto KPick19;
+if ($LkW19== $LkW6) goto KPick19;
+if ($LkW19== $LkW7) goto KPick19;
+if ($LkW19== $LkW8) goto KPick19;
+if ($LkW19== $LkW9) goto KPick19;
+if ($LkW19== $LkW10) goto KPick19;
+if ($LkW19== $LkW11) goto KPick19;
+if ($LkW19== $LkW12) goto KPick19;
+if ($LkW19== $LkW13) goto KPick19;
+if ($LkW19== $LkW14) goto KPick19;
+if ($LkW19== $LkW15) goto KPick19;
+if ($LkW19== $LkW16) goto KPick19;
+if ($LkW19== $LkW17) goto KPick19;
+if ($LkW19== $LkW18) goto KPick19;
+
+KPick20:
+set $LkW20,rand (1,80);
+if ($LkW20 == $LkW1) goto KPick20;
+if ($LkW20== $LkW2) goto KPick20;
+if ($LkW20== $LkW3) goto KPick20;
+if ($LkW20== $LkW4) goto KPick20;
+if ($LkW20== $LkW5) goto KPick20;
+if ($LkW20== $LkW6) goto KPick20;
+if ($LkW20== $LkW7) goto KPick20;
+if ($LkW20== $LkW8) goto KPick20;
+if ($LkW20== $LkW9) goto KPick20;
+if ($LkW20== $LkW10) goto KPick20;
+if ($LkW20== $LkW11) goto KPick20;
+if ($LkW20== $LkW12) goto KPick20;
+if ($LkW20== $LkW13) goto KPick20;
+if ($LkW20== $LkW14) goto KPick20;
+if ($LkW20== $LkW15) goto KPick20;
+if ($LkW20== $LkW16) goto KPick20;
+if ($LkW20== $LkW17) goto KPick20;
+if ($LkW20== $LkW18) goto KPick20;
+if ($LkW20== $LkW19) goto KPick20;
+
+
+// BROADCASTS DRAW
+KENO_Broadcast:
+Announce "Keno Teller: Welcome to KENO Lotto draw!",8;
+Announce "The numbers are as follows: [" + $LkW1 + "] [" + $LkW2 + "] [" + $LkW3 + "] [" + $LkW4 + "] [" + $LkW5 + "]",8;
+Announce "The numbers are as follows: [" + $LkW6 + "] [" + $LkW7 + "] [" + $LkW8 + "] [" + $LkW9 + "] [" + $LkW10 + "]",8;
+Announce "The numbers are as follows: [" + $LkW11 + "] [" + $LkW12 + "] [" + $LkW13 + "] [" + $LkW14 + "] [" + $LkW15 + "]",8;
+Announce "The numbers are as follows: [" + $LkW16 + "] [" + $LkW17 + "]  [" + $LkW18 + "] [" + $LkW19 + "] [" + $LkW20 + "]",8;
+Announce "Congratulations to the winners of " + gettimestr("%H:%M",21) + " Keno Draw ",8;
+
+// GENERATES DRAW ID CODE
+KENO_GenID:
+set $LKID2,$LKID;
+// SETS TOMORROW'S ID NUMBER
+set $LKID,rand (100000,999999);
+end;
+
+// SETS DRAW TO RIGGED NUMBERS
+KENO_Rigged_Draw:
+set $LkW1,$LkR1;
+set $LkW2,$LkR2;
+set $LkW3,$LkR3;
+set $LkW4,$LkR4;
+set $LkW5,$LkR5;
+set $LkW6,$LkR6;
+set $LkW7,$LkR7;
+set $LkW8,$LkR8;
+set $LkW9,$LkR9;
+set $LkW10,$LkR10;
+set $LkW11,$LkR11;
+set $LkW12,$LkR12;
+set $LkW13,$LkR13;
+set $LkW14,$LkR14;
+set $LkW15,$LkR15;
+set $LkW16,$LkR16;
+set $LkW17,$LkR17;
+set $LkW18,$LkR18;
+set $LkW19,$LkR19;
+set $LkW20,$LkR20;
+set $KENO_Rigged,0;
+goto KENO_Broadcast;
+}
+
+// BEGIN LOTTERY SCRIPT
+-	script	klottery	76,{
+KENO_Begin:
+mes "[Keno Teller]";
+mes "Winning KENO Lotto Numbers (^00FF00"+$LKID2+"^000000):";
+mes "^FF0000[" + $LkW1 + "] [" + $LkW2 + "] [" + $LkW3 + "] [" + $LkW4 + "] [" + $LkW5 + "]^000000";
+mes "^0000FF[" + $LkW6 + "] [" + $LkW7 + "] [" + $LkW8 + "] [" + $LkW9 + "] [" + $LkW10 + "]^000000";
+mes "^FF0000[" + $LkW11 + "] [" + $LkW12 + "] [" + $LkW13 + "] [" + $LkW14 + "] [" + $LkW15 + "]^000000";
+mes "^0000FF[" + $LkW16 + "] [" + $LkW17 + "] [" + $LkW18 + "] [" + $LkW19 + "] [" + $LkW20 + "]^000000";
+if ($LKID > 99999) mes "Your Ticket ("+#LkID+"):";
+if ($LKID > 99999) mes "^FF0000[" + #LkW1 + "] [" + #LkW2 + "] [" + #LkW3 + "] [" + #LkW4 + "] [" + #LkW5 + "]^000000";
+mes "^0000FF[" + #LkW6 + "] [" + #LkW7 + "] [" + #LkW8 + "] [" + #LkW9 + "] [" + #LkW10 + "]^000000";
+mes "Next Draw-ID: ^FF0000" + $LKID + "^000000.";
+next;
+if (getgmlevel() > 90) goto KENO_GM;
+menu "Claim Prize",KENO_Claim,"Buy New Ticket",KENO_Buy,"Cancel",KENO_Cancel;
+
+// PURCHASE TICKET
+KENO_Buy:
+if (#LkID == $LKID && #LkW1 != 0) goto KENO_DoubleTicket;
+mes "[Keno Teller]";
+mes "Tickets cost ^0000FF" + $KENO_TicketPrice + "z^000000.";
+mes "The Jackpot is ^FF0000" + $KENO_Prize_Money + "z^000000.";
+next;
+menu "Buy Ticket",-,"Cancel",KENO_Cancel;
+if (zeny < $KENO_TicketPrice) goto KENO_NoZeny;
+set zeny,zeny-$KENO_TicketPrice;
+mes "[Keno Teller]";
+mes "Would you like your numbers hand Picked or computer generated?";
+next;
+menu "Computer Generated",KENO_ComputerGen,"Hand Picked",KENO_HandPick,"Renew Ticket",KENO_Renew;
+
+// RENEW LAST TICKET
+KENO_Renew:
+if ($LKID < 99999) goto KENO_Invalid;
+set #LkID,$LKID;
+goto KENO_Confirm2;
+
+KENO_ComputerGen:
+// SELECTS RANDOM NUMBERS
+set @Lk1,0;
+set @Lk2,0;
+set @Lk3,0;
+set @Lk4,0;
+set @Lk5,0;
+set @Lk6,0;
+set @Lk7,0;
+set @Lk8,0;
+set @Lk9,0;
+set @Lk10,0;
+
+KPick1:
+set @Lk1,rand (1,80);
+
+KPick2:
+set @Lk2,rand (1,80);
+if (@Lk2 == @Lk1) goto KPick2;
+
+KPick3:
+set @Lk3,rand (1,80);
+if (@Lk3 == @Lk2) goto KPick3;
+if (@Lk3 == @Lk1) goto KPick3;
+
+KPick4:
+set @Lk4,rand (1,80);
+if (@Lk4 == @Lk2) goto KPick4;
+if (@Lk4 == @Lk1) goto KPick4;
+if (@Lk4 == @Lk3) goto KPick4;
+
+KPick5:
+set @Lk5,rand (1,80);
+if (@Lk5 == @Lk1) goto KPick5;
+if (@Lk5 == @Lk2) goto KPick5;
+if (@Lk5 == @Lk3) goto KPick5;
+if (@Lk5 == @Lk4) goto KPick5;
+
+KPick6:
+set @Lk6,rand (1,80);
+if (@Lk6 == @Lk1) goto KPick6;
+if (@Lk6 == @Lk2) goto KPick6;
+if (@Lk6 == @Lk3) goto KPick6;
+if (@Lk6 == @Lk4) goto KPick6;
+if (@Lk6 == @Lk5) goto KPick6;
+
+KPick7:
+set @Lk7,rand (1,80);
+if (@Lk7 == @Lk1) goto KPick7;
+if (@Lk7 == @Lk2) goto KPick7;
+if (@Lk7 == @Lk3) goto KPick7;
+if (@Lk7 == @Lk4) goto KPick7;
+if (@Lk7 == @Lk5) goto KPick7;
+if (@Lk7 == @Lk6) goto KPick7;
+
+KPick8:
+set @Lk8,rand (1,80);
+if (@Lk8 == @Lk1) goto KPick8;
+if (@Lk8 == @Lk2) goto KPick8;
+if (@Lk8 == @Lk3) goto KPick8;
+if (@Lk8 == @Lk4) goto KPick8;
+if (@Lk8 == @Lk5) goto KPick8;
+if (@Lk8 == @Lk6) goto KPick8;
+if (@Lk8 == @Lk7) goto KPick8;
+
+KPick9:
+set @Lk9,rand (1,80);
+if (@Lk9 == @Lk1) goto KPick9;
+if (@Lk9 == @Lk2) goto KPick9;
+if (@Lk9 == @Lk3) goto KPick9;
+if (@Lk9 == @Lk4) goto KPick9;
+if (@Lk9 == @Lk5) goto KPick9;
+if (@Lk9 == @Lk6) goto KPick9;
+if (@Lk9 == @Lk7) goto KPick9;
+if (@Lk9 == @Lk8) goto KPick9;
+
+KPick10:
+set @Lk10,rand (1,80);
+if (@Lk10 == @Lk1) goto KPick10;
+if (@Lk10 == @Lk2) goto KPick10;
+if (@Lk10 == @Lk3) goto KPick10;
+if (@Lk10 == @Lk4) goto KPick10;
+if (@Lk10 == @Lk5) goto KPick10;
+if (@Lk10 == @Lk6) goto KPick10;
+if (@Lk10 == @Lk7) goto KPick10;
+if (@Lk10 == @Lk8) goto KPick10;
+if (@Lk10 == @Lk9) goto KPick10;
+
+mes "[Keno Teller]";
+mes "The computer has selected the following numbers:";
+mes "^FF0000" + @Lk1 + " " + @Lk2 + " " + @Lk3 + " " + @Lk4 + " " + @Lk5 + "^000000";
+mes "^0000FF" + @Lk6 + " " + @Lk7 + " " + @Lk8 + " " + @Lk9 + " " + @Lk10 + "^000000";
+next;
+menu "Confirm",KENO_Confirm,"Re-Generate",KENO_ComputerGen;
+
+// HAND Pick LOTTERY NUMBERS
+KENO_HandPick:
+mes "[Keno Teller]";
+mes "Please Pick your numbers (1-80):";
+set @Lk1,0;
+set @Lk2,0;
+set @Lk3,0;
+set @Lk4,0;
+set @Lk5,0;
+set @Lk6,0;
+set @Lk7,0;
+set @Lk8,0;
+set @Lk9,0;
+set @Lk10,0;
+
+KnInput1:
+input @Lk1;
+if (@Lk1 < 1 || @Lk1 > 80) goto KnInput1;
+mes @Lk1;
+
+
+KnInput2:
+input @Lk2;
+if (@Lk2 < 1 || @Lk2 > 80) goto KnInput2;
+if (@Lk2 == @Lk1) goto KnInput2;
+mes @Lk2;
+
+KnInput3:
+input @Lk3;
+if (@Lk3 < 1 || @Lk3 > 80) goto KnInput3;
+if (@Lk3 == @Lk2) goto KnInput3;
+if (@Lk3 == @Lk1) goto KnInput3;
+mes @Lk3;
+
+KnInput4:
+input @Lk4;
+if (@Lk4 < 1 || @Lk4 > 80) goto KnInput4;
+if (@Lk4 == @Lk2) goto KnInput4;
+if (@Lk4 == @Lk1) goto KnInput4;
+if (@Lk4 == @Lk3) goto KnInput4;
+mes @Lk4;
+
+KnInput5:
+input @Lk5;
+if (@Lk5 < 1 || @Lk5 > 80) goto KnInput5;
+if (@Lk5 == @Lk1) goto KnInput5;
+if (@Lk5 == @Lk2) goto KnInput5;
+if (@Lk5 == @Lk3) goto KnInput5;
+if (@Lk5 == @Lk4) goto KnInput5;
+mes @Lk5;
+
+KnInput6:
+input @Lk6;
+if (@Lk6 < 1 || @Lk6 > 80) goto KnInput6;
+if (@Lk6 == @Lk1) goto KnInput6;
+if (@Lk6 == @Lk2) goto KnInput6;
+if (@Lk6 == @Lk3) goto KnInput6;
+if (@Lk6 == @Lk4) goto KnInput6;
+if (@Lk6 == @Lk5) goto KnInput6;
+mes @Lk6;
+
+KnInput7:
+input @Lk7;
+if (@Lk7 < 1 || @Lk7 > 80) goto KnInput7;
+if (@Lk7 == @Lk1) goto KnInput7;
+if (@Lk7 == @Lk2) goto KnInput7;
+if (@Lk7 == @Lk3) goto KnInput7;
+if (@Lk7 == @Lk4) goto KnInput7;
+if (@Lk7 == @Lk5) goto KnInput7;
+if (@Lk7 == @Lk6) goto KnInput7;
+mes @Lk7;
+
+KnInput8:
+input @Lk8;
+if (@Lk8 < 1 || @Lk8 > 80) goto KnInput8;
+if (@Lk8 == @Lk1) goto KnInput8;
+if (@Lk8 == @Lk2) goto KnInput8;
+if (@Lk8 == @Lk3) goto KnInput8;
+if (@Lk8 == @Lk4) goto KnInput8;
+if (@Lk8 == @Lk5) goto KnInput8;
+if (@Lk8 == @Lk6) goto KnInput8;
+if (@Lk8 == @Lk7) goto KnInput8;
+mes @Lk8;
+
+KnInput9:
+input @Lk9;
+if (@Lk9 < 1 || @Lk9 > 80) goto KnInput9;
+if (@Lk9 == @Lk1) goto KnInput9;
+if (@Lk9 == @Lk2) goto KnInput9;
+if (@Lk9 == @Lk3) goto KnInput9;
+if (@Lk9 == @Lk4) goto KnInput9;
+if (@Lk9 == @Lk5) goto KnInput9;
+if (@Lk9 == @Lk6) goto KnInput9;
+if (@Lk9 == @Lk7) goto KnInput9;
+if (@Lk9 == @Lk8) goto KnInput9;
+mes @Lk9;
+
+KnInput10:
+input @Lk10;
+if (@Lk10 < 1 || @Lk10 > 80) goto KnInput10;
+if (@Lk10 == @Lk1) goto KnInput10;
+if (@Lk10 == @Lk2) goto KnInput10;
+if (@Lk10 == @Lk3) goto KnInput10;
+if (@Lk10 == @Lk4) goto KnInput10;
+if (@Lk10 == @Lk5) goto KnInput10;
+if (@Lk10 == @Lk6) goto KnInput10;
+if (@Lk10 == @Lk7) goto KnInput10;
+if (@Lk10 == @Lk8) goto KnInput10;
+if (@Lk10 == @Lk9) goto KnInput10;
+mes @Lk10;
+next;
+
+mes "[Keno Teller]";
+mes "Your numbers are:";
+mes "^FF0000" + @Lk1 + " " + @Lk2 + " " + @Lk3 + " " + @Lk4 + " " + @Lk5 + "^000000";
+mes "^0000FF" + @Lk6 + " " + @Lk7 + " " + @Lk8 + " " + @Lk9 + " " + @Lk10 + "^000000";
+next;
+menu "Confirm",KENO_Confirm,"Re-Pick",KENO_HandPick;
+
+KENO_Confirm:
+set #LkW1,@Lk1;
+set #LkW2,@Lk2;
+set #LkW3,@Lk3;
+set #LkW4,@Lk4;
+set #LkW5,@Lk5;
+set #LkW6,@Lk6;
+set #LkW7,@Lk7;
+set #LkW8,@Lk8;
+set #LkW9,@Lk9;
+set #LkW10,@Lk10;
+set #LkID,$LKID;
+KENO_Confirm2:
+mes "[Keno Teller]";
+mes "Wait for the live broadcasted draw every hour!";
+mes "You can claim your ticket between then and the next draw.";
+next;
+mes "[Keno Teller]";
+mes "Good luck!";
+close;
+
+KENO_Claim:
+// CHECKS TICKET VALIDILITY
+if (#LkID != $LKID2) goto KENO_Invalid;
+// CHECKS HOW MANY NUMBERS MATCHED
+set @LkPrize,0;
+if (#LkW1 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW2 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW2 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW3 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW3 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW4 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW1 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW4 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW5 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW5 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW6 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW6 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW7 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW7 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW8 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW8 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW9 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW9 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (#LkW10 == $LkW1) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW2) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW3) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW4) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW5) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW6) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW7) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW8) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW9) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW10) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW11) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW12) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW13) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW14) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW15) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW16) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW17) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW18) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW19) set @LkPrize,@LkPrize+1;
+if (#LkW10 == $LkW20) set @LkPrize,@LkPrize+1;
+
+if (@LkPrize == 10) goto LkWin10;
+if (@LkPrize == 9) goto LkWin9;
+if (@LkPrize == 8) goto LkWin8;
+if (@LkPrize == 7) goto LkWin7;
+if (@LkPrize == 6) goto LkWin6;
+if (@LkPrize == 5) goto LkWin5;
+if (@LkPrize == 4) goto LkWin4;
+if (@LkPrize == 3) goto LkWin3;
+if (@LkPrize == 2) goto LkWin2;
+if (@LkPrize == 1) goto LkWin1;
+
+
+// NO WINNER
+mes "[Keno Teller]";
+mes "Bad luck, it appears you do not hold a winning ticket.";
+next;
+mes "[Keno Teller]";
+mes "Better luck next time!.";
+close;
+
+// MATCHED  10
+LkWin10:
+set @KENO_Prize_Money,($KENO_TicketPrice*10*9*8*7*6*5*4*3*2)-6288000;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won the JACKPOT of " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED  9
+LkWin9:
+set @KENO_Prize_Money, ($KENO_TicketPrice*9*8*7*6*5*4*3*2)-628800;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won the JACKPOT of " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED 8
+LkWin8:
+set @KENO_Prize_Money,($KENO_TicketPrice*8*7*6*5*4*3*2)-3200;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won the JACKPOT of " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED 7
+LkWin7:
+set @KENO_Prize_Money,($KENO_TicketPrice*7*6*5*4*3*2)-400;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED 6
+LkWin6:
+set @KENO_Prize_Money,($KENO_TicketPrice*6*5*4*3*2)-200;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED 5
+LkWin5:
+set @KENO_Prize_Money,($KENO_TicketPrice*5*4*3*2)-200;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED 4
+LkWin4:
+set @KENO_Prize_Money,($KENO_TicketPrice*4*3*2)-40;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED  3
+LkWin3:
+set @KENO_Prize_Money,$KENO_TicketPrice*3*2;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED  2
+LkWin2:
+set @KENO_Prize_Money,$KENO_TicketPrice*2;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+// MATCHED  1
+LkWin1:
+set @KENO_Prize_Money,$KENO_TicketPrice;
+mes "[Keno Teller]";
+mes "You have matched ^0000FF" + @LkPrize  + "^000000 numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + @KENO_Prize_Money + "z^000000.";
+set zeny,zeny+@KENO_Prize_Money;
+Announce "Keno Teller: " + strcharinfo(0) + " has won " + @KENO_Prize_Money + "z!",8;
+set @KENO_Prize_Money,0;
+set #LkID,0;
+close;
+
+
+// NO ZENY
+KENO_NoZeny:
+mes "[Keno Teller]";
+mes "You can't afford a Keno ticket.";
+close;
+
+// INVALID TICKET
+KENO_Invalid:
+mes "[Keno Teller]";
+mes "I'm sorry but it appears that you have an invalid ticket.";
+close;
+
+// DOUBLE TICKET
+KENO_DoubleTicket:
+mes "[Keno Teller]";
+mes "It appears that you already have a ticket for today.";
+mes "You may only purchase one ticket per draw.";
+close;
+
+KENO_Cancel:
+mes "[Keno Teller]";
+mes "Come back soon!";
+close;
+
+// GM MENU (Lets you manually do draws)
+KENO_GM:
+menu "Claim Prize",KENO_Claim,"Buy New Ticket",KENO_Buy,"[GM]Do Draw Now",-,"[GM]Rig the Lottery",KENO_GM_Rig,"Cancel",KENO_Cancel;
+
+// CHECKS IF LOTTERY IS RIGGED
+if ($KENO_Rigged == 1) goto KENO_Rigged_Draw;
+
+// GENERATES RANDOM NUMBERS 1-80
+GMKPick1:
+set $LkW1,rand (1,80);
+
+GMKPick2:
+set $LkW2,rand (1,80);
+if ($LkW2 == $LkW1) goto GMKPick2;
+
+GMKPick3:
+set $LkW3,rand (1,80);
+if ($LkW3 == $LkW2) goto GMKPick3;
+if ($LkW3 == $LkW1) goto GMKPick3;
+
+GMKPick4:
+set $LkW4,rand (1,80);
+if ($LkW4 == $LkW2) goto GMKPick4;
+if ($LkW4 == $LkW1) goto GMKPick4;
+if ($LkW4 == $LkW3) goto GMKPick4;
+
+GMKPick5:
+set $LkW5,rand (1,80);
+if ($LkW5 == $LkW1) goto GMKPick5;
+if ($LkW5 == $LkW2) goto GMKPick5;
+if ($LkW5 == $LkW3) goto GMKPick5;
+if ($LkW5 == $LkW4) goto GMKPick5;
+
+GMKPick6:
+set $LkW6,rand (1,80);
+if ($LkW6 == $LkW1) goto GMKPick6;
+if ($LkW6 == $LkW2) goto GMKPick6;
+if ($LkW6 == $LkW3) goto GMKPick6;
+if ($LkW6 == $LkW4) goto GMKPick6;
+if ($LkW6 == $LkW5) goto GMKPick6;
+
+GMKPick7:
+set $LkW7,rand (1,80);
+if ($LkW7 == $LkW1) goto GMKPick7;
+if ($LkW7 == $LkW2) goto GMKPick7;
+if ($LkW7 == $LkW3) goto GMKPick7;
+if ($LkW7 == $LkW4) goto GMKPick7;
+if ($LkW7 == $LkW5) goto GMKPick7;
+if ($LkW7 == $LkW6) goto GMKPick7;
+
+GMKPick8:
+set $LkW8,rand (1,80);
+if ($LkW8 == $LkW1) goto GMKPick8;
+if ($LkW8 == $LkW2) goto GMKPick8;
+if ($LkW8 == $LkW3) goto GMKPick8;
+if ($LkW8 == $LkW4) goto GMKPick8;
+if ($LkW8 == $LkW5) goto GMKPick8;
+if ($LkW8 == $LkW6) goto GMKPick8;
+if ($LkW8 == $LkW7) goto GMKPick8;
+
+GMKPick9:
+set $LkW9,rand (1,80);
+if ($LkW9 == $LkW1) goto GMKPick9;
+if ($LkW9 == $LkW2) goto GMKPick9;
+if ($LkW9 == $LkW3) goto GMKPick9;
+if ($LkW9 == $LkW4) goto GMKPick9;
+if ($LkW9 == $LkW5) goto GMKPick9;
+if ($LkW9 == $LkW6) goto GMKPick9;
+if ($LkW9 == $LkW7) goto GMKPick9;
+if ($LkW9 == $LkW8) goto GMKPick9;
+
+GMKPick10:
+set $LkW10,rand (1,80);
+if ($LkW10 == $LkW1) goto GMKPick10;
+if ($LkW10 == $LkW2) goto GMKPick10;
+if ($LkW10 == $LkW3) goto GMKPick10;
+if ($LkW10 == $LkW4) goto GMKPick10;
+if ($LkW10 == $LkW5) goto GMKPick10;
+if ($LkW10 == $LkW6) goto GMKPick10;
+if ($LkW10 == $LkW7) goto GMKPick10;
+if ($LkW10 == $LkW8) goto GMKPick10;
+if ($LkW10 == $LkW9) goto GMKPick10;
+
+GMKPick11:
+set $LkW11,rand (1,80);
+if ($LkW11 == $LkW1) goto GMKPick11;
+if ($LkW11 == $LkW2) goto GMKPick11;
+if ($LkW11 == $LkW3) goto GMKPick11;
+if ($LkW11 == $LkW4) goto GMKPick11;
+if ($LkW11 == $LkW5) goto GMKPick11;
+if ($LkW11 == $LkW6) goto GMKPick11;
+if ($LkW11 == $LkW7) goto GMKPick11;
+if ($LkW11 == $LkW8) goto GMKPick11;
+if ($LkW11 == $LkW9) goto GMKPick11;
+if ($LkW11 == $LkW10) goto GMKPick11;
+
+GMKPick12:
+set $LkW12,rand (1,80);
+if ($LkW12 == $LkW1) goto GMKPick12;
+if ($LkW12 == $LkW2) goto GMKPick12;
+if ($LkW12 == $LkW3) goto GMKPick12;
+if ($LkW12 == $LkW4) goto GMKPick12;
+if ($LkW12 == $LkW5) goto GMKPick12;
+if ($LkW12 == $LkW6) goto GMKPick12;
+if ($LkW12 == $LkW7) goto GMKPick12;
+if ($LkW12 == $LkW8) goto GMKPick12;
+if ($LkW12 == $LkW9) goto GMKPick12;
+if ($LkW12 == $LkW10) goto GMKPick12;
+if ($LkW12 == $LkW11) goto GMKPick12;
+
+GMKPick13:
+set $LkW13,rand (1,80);
+if ($LkW13 == $LkW1) goto GMKPick13;
+if ($LkW13 == $LkW2) goto GMKPick13;
+if ($LkW13 == $LkW3) goto GMKPick13;
+if ($LkW13 == $LkW4) goto GMKPick13;
+if ($LkW13 == $LkW5) goto GMKPick13;
+if ($LkW13 == $LkW6) goto GMKPick13;
+if ($LkW13 == $LkW7) goto GMKPick13;
+if ($LkW13 == $LkW8) goto GMKPick13;
+if ($LkW13 == $LkW9) goto GMKPick13;
+if ($LkW13 == $LkW10) goto GMKPick13;
+if ($LkW13 == $LkW11) goto GMKPick13;
+if ($LkW13 == $LkW12) goto GMKPick13;
+
+GMKPick14:
+set $LkW14,rand (1,80);
+if ($LkW14 == $LkW1) goto GMKPick14;
+if ($LkW14 == $LkW2) goto GMKPick14;
+if ($LkW14 == $LkW3) goto GMKPick14;
+if ($LkW14 == $LkW4) goto GMKPick14;
+if ($LkW14 == $LkW5) goto GMKPick14;
+if ($LkW14 == $LkW6) goto GMKPick14;
+if ($LkW14 == $LkW7) goto GMKPick14;
+if ($LkW14 == $LkW8) goto GMKPick14;
+if ($LkW14 == $LkW9) goto GMKPick14;
+if ($LkW14 == $LkW10) goto GMKPick14;
+if ($LkW14 == $LkW11) goto GMKPick14;
+if ($LkW14 == $LkW12) goto GMKPick14;
+if ($LkW14 == $LkW13) goto GMKPick14;
+
+GMKPick15:
+set $LkW15,rand (1,80);
+if ($LkW15 == $LkW1) goto GMKPick15;
+if ($LkW15 == $LkW2) goto GMKPick15;
+if ($LkW15 == $LkW3) goto GMKPick15;
+if ($LkW15 == $LkW4) goto GMKPick15;
+if ($LkW15 == $LkW5) goto GMKPick15;
+if ($LkW15 == $LkW6) goto GMKPick15;
+if ($LkW15 == $LkW7) goto GMKPick15;
+if ($LkW15 == $LkW8) goto GMKPick15;
+if ($LkW15 == $LkW9) goto GMKPick15;
+if ($LkW15 == $LkW10) goto GMKPick15;
+if ($LkW15 == $LkW11) goto GMKPick15;
+if ($LkW15 == $LkW12) goto GMKPick15;
+if ($LkW15 == $LkW13) goto GMKPick15;
+if ($LkW15 == $LkW14) goto GMKPick15;
+
+GMKPick16:
+set $LkW16,rand (1,80);
+if ($LkW16 == $LkW1) goto GMKPick16;
+if ($LkW16 == $LkW2) goto GMKPick16;
+if ($LkW16 == $LkW3) goto GMKPick16;
+if ($LkW16 == $LkW4) goto GMKPick16;
+if ($LkW16 == $LkW5) goto GMKPick16;
+if ($LkW16 == $LkW6) goto GMKPick16;
+if ($LkW16 == $LkW7) goto GMKPick16;
+if ($LkW16 == $LkW8) goto GMKPick16;
+if ($LkW16 == $LkW9) goto GMKPick16;
+if ($LkW16 == $LkW10) goto GMKPick16;
+if ($LkW16 == $LkW11) goto GMKPick16;
+if ($LkW16 == $LkW12) goto GMKPick16;
+if ($LkW16 == $LkW13) goto GMKPick16;
+if ($LkW16 == $LkW14) goto GMKPick16;
+if ($LkW16 == $LkW15) goto GMKPick16;
+
+GMKPick17:
+set $LkW17,rand (1,80);
+if ($LkW17 == $LkW1) goto GMKPick17;
+if ($LkW17 == $LkW2) goto GMKPick17;
+if ($LkW17 == $LkW3) goto GMKPick17;
+if ($LkW17 == $LkW4) goto GMKPick17;
+if ($LkW17 == $LkW5) goto GMKPick17;
+if ($LkW17 == $LkW6) goto GMKPick17;
+if ($LkW17 == $LkW7) goto GMKPick17;
+if ($LkW17 == $LkW8) goto GMKPick17;
+if ($LkW17 == $LkW9) goto GMKPick17;
+if ($LkW17 == $LkW10) goto GMKPick17;
+if ($LkW17 == $LkW11) goto GMKPick17;
+if ($LkW17 == $LkW12) goto GMKPick17;
+if ($LkW17 == $LkW13) goto GMKPick17;
+if ($LkW17 == $LkW14) goto GMKPick17;
+if ($LkW17 == $LkW15) goto GMKPick17;
+if ($LkW17 == $LkW16) goto GMKPick17;
+
+GMKPick18:
+set $LkW18,rand (1,80);
+if ($LkW18 == $LkW1) goto GMKPick18;
+if ($LkW18== $LkW2) goto GMKPick18;
+if ($LkW18== $LkW3) goto GMKPick18;
+if ($LkW18== $LkW4) goto GMKPick18;
+if ($LkW18== $LkW5) goto GMKPick18;
+if ($LkW18== $LkW6) goto GMKPick18;
+if ($LkW18== $LkW7) goto GMKPick18;
+if ($LkW18== $LkW8) goto GMKPick18;
+if ($LkW18== $LkW9) goto GMKPick18;
+if ($LkW18== $LkW10) goto GMKPick18;
+if ($LkW18== $LkW11) goto GMKPick18;
+if ($LkW18== $LkW12) goto GMKPick18;
+if ($LkW18== $LkW13) goto GMKPick18;
+if ($LkW18== $LkW14) goto GMKPick18;
+if ($LkW18== $LkW15) goto GMKPick18;
+if ($LkW18== $LkW16) goto GMKPick18;
+if ($LkW18== $LkW17) goto GMKPick18;
+
+GMKPick19:
+set $LkW19,rand (1,80);
+if ($LkW19 == $LkW1) goto GMKPick19;
+if ($LkW19== $LkW2) goto GMKPick19;
+if ($LkW19== $LkW3) goto GMKPick19;
+if ($LkW19== $LkW4) goto GMKPick19;
+if ($LkW19== $LkW5) goto GMKPick19;
+if ($LkW19== $LkW6) goto GMKPick19;
+if ($LkW19== $LkW7) goto GMKPick19;
+if ($LkW19== $LkW8) goto GMKPick19;
+if ($LkW19== $LkW9) goto GMKPick19;
+if ($LkW19== $LkW10) goto GMKPick19;
+if ($LkW19== $LkW11) goto GMKPick19;
+if ($LkW19== $LkW12) goto GMKPick19;
+if ($LkW19== $LkW13) goto GMKPick19;
+if ($LkW19== $LkW14) goto GMKPick19;
+if ($LkW19== $LkW15) goto GMKPick19;
+if ($LkW19== $LkW16) goto GMKPick19;
+if ($LkW19== $LkW17) goto GMKPick19;
+if ($LkW19== $LkW18) goto GMKPick19;
+
+GMKPick20:
+set $LkW20,rand (1,80);
+if ($LkW20 == $LkW1) goto GMKPick20;
+if ($LkW20== $LkW2) goto GMKPick20;
+if ($LkW20== $LkW3) goto GMKPick20;
+if ($LkW20== $LkW4) goto GMKPick20;
+if ($LkW20== $LkW5) goto GMKPick20;
+if ($LkW20== $LkW6) goto GMKPick20;
+if ($LkW20== $LkW7) goto GMKPick20;
+if ($LkW20== $LkW8) goto GMKPick20;
+if ($LkW20== $LkW9) goto GMKPick20;
+if ($LkW20== $LkW10) goto GMKPick20;
+if ($LkW20== $LkW11) goto GMKPick20;
+if ($LkW20== $LkW12) goto GMKPick20;
+if ($LkW20== $LkW13) goto GMKPick20;
+if ($LkW20== $LkW14) goto GMKPick20;
+if ($LkW20== $LkW15) goto GMKPick20;
+if ($LkW20== $LkW16) goto GMKPick20;
+if ($LkW20== $LkW17) goto GMKPick20;
+if ($LkW20== $LkW18) goto GMKPick20;
+if ($LkW20== $LkW19) goto GMKPick20;
+
+// BROADCASTS DRAW
+KENO_Broadcast:
+Announce "Keno Teller: Welcome to the special GM's KENO Lotto draw!",8;
+Announce "The numbers are as follows: [" + $LkW1 + "] [" + $LkW2 + "] [" + $LkW3 + "] [" + $LkW4 + "] [" + $LkW5 + "]",8;
+Announce "The numbers are as follows: [" + $LkW6 + "] [" + $LkW7 + "] [" + $LkW8 + "] [" + $LkW9 + "] [" + $LkW10 + "]",8;
+Announce "The numbers are as follows: [" + $LkW11 + "] [" + $LkW12 + "] [" + $LkW13 + "] [" + $LkW14 + "] [" + $LkW15 + "]",8;
+Announce "The numbers are as follows: [" + $LkW16 + "] [" + $LkW17 + "]  [" + $LkW18 + "] [" + $LkW19 + "] [" + $LkW20 + "]",8;
+Announce "Congratulations to the winners!",8;
+
+// GENERATES DRAW ID CODE
+KENO_GenID:
+set $LKID2,$LKID;
+// SETS TOMORROW'S ID NUMBER
+set $LKID,rand (100000,999999);
+close;
+
+// SETS DRAW TO RIGGED NUMBERS
+KENO_Rigged_Draw:
+set $LkW1,$LkR1;
+set $LkW2,$LkR2;
+set $LkW3,$LkR3;
+set $LkW4,$LkR4;
+set $LkW5,$LkR5;
+set $LkW6,$LkR6;
+set $LkW7,$LkR7;
+set $LkW8,$LkR8;
+set $LkW9,$LkR9;
+set $LkW10,$LkR10;
+set $LkW11,$LkR11;
+set $LkW12,$LkR12;
+set $LkW13,$LkR13;
+set $LkW14,$LkR14;
+set $LkW15,$LkR15;
+set $LkW16,$LkR16;
+set $LkW17,$LkR17;
+set $LkW18,$LkR18;
+set $LkW19,$LkR19;
+set $LkW20,$LkR20;
+set $KENO_Rigged,0;
+goto KENO_Broadcast;
+
+// ALLOWS GM TO DO A RIGGED DRAW
+KENO_GM_Rig:
+mes "[Keno Teller]";
+mes "Please pick your numbers (1-80):";
+set $LkR1,0;
+set $LkR2,0;
+set $LkR3,0;
+set $LkR4,0;
+set $LkR5,0;
+set $LkR6,0;
+set $LkR7,0;
+set $LkR8,0;
+set $LkR9,0;
+set $LkR10,0;
+set $LkR11,0;
+set $LkR12,0;
+set $LkR13,0;
+set $LkR14,0;
+set $LkR15,0;
+set $LkR16,0;
+set $LkR17,0;
+set $LkR18,0;
+set $LkR19,0;
+set $LkR20,0;
+GMKnInput1:
+Input $LkR1;
+if ($LkR1 < 1 || $LkR1 > 80) goto GMKnInput1;
+mes $LkR1;
+GMKnInput2:
+Input $LkR2;
+if ($LkR2 < 1 || $LkR2 > 80) goto GMKnInput2;
+if ($LkR2 == $LkR1) goto GMKnInput2;
+mes $LkR2;
+GMKnInput3:
+Input $LkR3;
+if ($LkR3 < 1 || $LkR3 > 80) goto GMKnInput3;
+if ($LkR3 == $LkR1) goto GMKnInput3;
+if ($LkR3 == $LkR2) goto GMKnInput3;
+mes $LkR3;
+GMKnInput4:
+Input $LkR4;
+if ($LkR4 < 1 || $LkR4 > 80) goto GMKnInput4;
+if ($LkR4 == $LkR1) goto GMKnInput4;
+if ($LkR4 == $LkR2) goto GMKnInput4;
+if ($LkR4 == $LkR3) goto GMKnInput4;
+mes $LkR4;
+GMKnInput5:
+Input $LkR5;
+if ($LkR5 < 1 || $LkR5 > 80) goto GMKnInput5;
+if ($LkR5 == $LkR1) goto GMKnInput5;
+if ($LkR5 == $LkR2) goto GMKnInput5;
+if ($LkR5 == $LkR3) goto GMKnInput5;
+if ($LkR5 == $LkR4) goto GMKnInput5;
+mes $LkR5;
+GMKnInput6:
+Input $LkR6;
+if ($LkR6 < 1 || $LkR6 > 80) goto GMKnInput6;
+if ($LkR6 == $LkR1) goto GMKnInput6;
+if ($LkR6 == $LkR2) goto GMKnInput6;
+if ($LkR6 == $LkR3) goto GMKnInput6;
+if ($LkR6 == $LkR4) goto GMKnInput6;
+if ($LkR6 == $LkR5) goto GMKnInput6;
+mes $LkR6;
+GMKnInput7:
+Input $LkR7;
+if ($LkR7 < 1 || $LkR7 > 80) goto GMKnInput7;
+if ($LkR7 == $LkR1) goto GMKnInput7;
+if ($LkR7 == $LkR2) goto GMKnInput7;
+if ($LkR7 == $LkR3) goto GMKnInput7;
+if ($LkR7 == $LkR4) goto GMKnInput7;
+if ($LkR7 == $LkR5) goto GMKnInput7;
+if ($LkR7 == $LkR6) goto GMKnInput7;
+mes $LkR7;
+GMKnInput8:
+input $LkR8;
+if ($LkR8 < 1 || $LkR8 > 80) goto GMKnInput8;
+if ($LkR8 == $LkR1) goto GMKnInput8;
+if ($LkR8 == $LkR2) goto GMKnInput8;
+if ($LkR8 == $LkR3) goto GMKnInput8;
+if ($LkR8 == $LkR4) goto GMKnInput8;
+if ($LkR8 == $LkR5) goto GMKnInput8;
+if ($LkR8 == $LkR6) goto GMKnInput8;
+if ($LkR8 == $LkR7) goto GMKnInput8;
+mes $LkR8;
+GMKnInput9:
+input $LkR9;
+if ($LkR9 < 1 || $LkR9 > 80) goto GMKnInput9;
+if ($LkR9 == $LkR1) goto GMKnInput9;
+if ($LkR9 == $LkR2) goto GMKnInput9;
+if ($LkR9 == $LkR3) goto GMKnInput9;
+if ($LkR9 == $LkR4) goto GMKnInput9;
+if ($LkR9 == $LkR5) goto GMKnInput9;
+if ($LkR9 == $LkR6) goto GMKnInput9;
+if ($LkR9 == $LkR7) goto GMKnInput9;
+if ($LkR9 == $LkR8) goto GMKnInput9;
+mes $LkR9;
+GMKnInput10:
+input $LkR10;
+if ($LkR10 < 1 || $LkR10 > 80) goto GMKnInput10;
+if ($LkR10 == $LkR1) goto GMKnInput10;
+if ($LkR10 == $LkR2) goto GMKnInput10;
+if ($LkR10 == $LkR3) goto GMKnInput10;
+if ($LkR10 == $LkR4) goto GMKnInput10;
+if ($LkR10 == $LkR5) goto GMKnInput10;
+if ($LkR10 == $LkR6) goto GMKnInput10;
+if ($LkR10 == $LkR7) goto GMKnInput10;
+if ($LkR10 == $LkR8) goto GMKnInput10;
+if ($LkR10 == $LkR9) goto GMKnInput10;
+mes $LkR10;
+GMKnInput11:
+input $LkR11;
+if ($LkR11 < 1 || $LkR11 > 80) goto GMKnInput11;
+if ($LkR11 == $LkR1) goto GMKnInput11;
+if ($LkR11 == $LkR2) goto GMKnInput11;
+if ($LkR11 == $LkR3) goto GMKnInput11;
+if ($LkR11 == $LkR4) goto GMKnInput11;
+if ($LkR11 == $LkR5) goto GMKnInput11;
+if ($LkR11 == $LkR6) goto GMKnInput11;
+if ($LkR11 == $LkR7) goto GMKnInput11;
+if ($LkR11 == $LkR8) goto GMKnInput11;
+if ($LkR11 == $LkR9) goto GMKnInput11;
+if ($LkR11 == $LkR10) goto GMKnInput11;
+mes $LkR11;
+GMKnInput12:
+input $LkR12;
+if ($LkR12 < 1 || $LkR12 > 80) goto GMKnInput12;
+if ($LkR12 == $LkR1) goto GMKnInput12;
+if ($LkR12 == $LkR2) goto GMKnInput12;
+if ($LkR12 == $LkR3) goto GMKnInput12;
+if ($LkR12 == $LkR4) goto GMKnInput12;
+if ($LkR12 == $LkR5) goto GMKnInput12;
+if ($LkR12 == $LkR6) goto GMKnInput12;
+if ($LkR12 == $LkR7) goto GMKnInput12;
+if ($LkR12 == $LkR8) goto GMKnInput12;
+if ($LkR12 == $LkR9) goto GMKnInput12;
+if ($LkR12 == $LkR10) goto GMKnInput12;
+if ($LkR12 == $LkR11) goto GMKnInput12;
+mes $LkR12;
+GMKnInput13:
+input $LkR13;
+if ($LkR13 < 1 || $LkR13 > 80) goto GMKnInput13;
+if ($LkR13 == $LkR1) goto GMKnInput13;
+if ($LkR13 == $LkR2) goto GMKnInput13;
+if ($LkR13 == $LkR3) goto GMKnInput13;
+if ($LkR13 == $LkR4) goto GMKnInput13;
+if ($LkR13 == $LkR5) goto GMKnInput13;
+if ($LkR13 == $LkR6) goto GMKnInput13;
+if ($LkR13 == $LkR7) goto GMKnInput13;
+if ($LkR13 == $LkR8) goto GMKnInput13;
+if ($LkR13 == $LkR9) goto GMKnInput13;
+if ($LkR13 == $LkR10) goto GMKnInput13;
+if ($LkR13 == $LkR11) goto GMKnInput13;
+if ($LkR13 == $LkR12) goto GMKnInput13;
+mes $LkR13;
+GMKnInput14:
+input $LkR14;
+if ($LkR14 < 1 || $LkR14 > 80) goto GMKnInput14;
+if ($LkR14 == $LkR1) goto GMKnInput14;
+if ($LkR14 == $LkR2) goto GMKnInput14;
+if ($LkR14 == $LkR3) goto GMKnInput14;
+if ($LkR14 == $LkR4) goto GMKnInput14;
+if ($LkR14 == $LkR5) goto GMKnInput14;
+if ($LkR14 == $LkR6) goto GMKnInput14;
+if ($LkR14 == $LkR7) goto GMKnInput14;
+if ($LkR14 == $LkR8) goto GMKnInput14;
+if ($LkR14 == $LkR9) goto GMKnInput14;
+if ($LkR14 == $LkR10) goto GMKnInput14;
+if ($LkR14 == $LkR11) goto GMKnInput14;
+if ($LkR14 == $LkR12) goto GMKnInput14;
+if ($LkR14 == $LkR13) goto GMKnInput14;
+mes $LkR14;
+GMKnInput15:
+input $LkR15;
+if ($LkR15 < 1 || $LkR15 > 80) goto GMKnInput15;
+if ($LkR15 == $LkR1) goto GMKnInput15;
+if ($LkR15 == $LkR2) goto GMKnInput15;
+if ($LkR15 == $LkR3) goto GMKnInput15;
+if ($LkR15 == $LkR4) goto GMKnInput15;
+if ($LkR15 == $LkR5) goto GMKnInput15;
+if ($LkR15 == $LkR6) goto GMKnInput15;
+if ($LkR15 == $LkR7) goto GMKnInput15;
+if ($LkR15 == $LkR8) goto GMKnInput15;
+if ($LkR15 == $LkR9) goto GMKnInput15;
+if ($LkR15 == $LkR10) goto GMKnInput15;
+if ($LkR15 == $LkR11) goto GMKnInput15;
+if ($LkR15 == $LkR12) goto GMKnInput15;
+if ($LkR15 == $LkR13) goto GMKnInput15;
+if ($LkR15 == $LkR14) goto GMKnInput15;
+mes $LkR15;
+GMKnInput16:
+input $LkR16;
+if ($LkR16 < 1 || $LkR16 > 80) goto GMKnInput16;
+if ($LkR16 == $LkR1) goto GMKnInput16;
+if ($LkR16 == $LkR2) goto GMKnInput16;
+if ($LkR16 == $LkR3) goto GMKnInput16;
+if ($LkR16 == $LkR4) goto GMKnInput16;
+if ($LkR16 == $LkR5) goto GMKnInput16;
+if ($LkR16 == $LkR6) goto GMKnInput16;
+if ($LkR16 == $LkR7) goto GMKnInput16;
+if ($LkR16 == $LkR8) goto GMKnInput16;
+if ($LkR16 == $LkR9) goto GMKnInput16;
+if ($LkR16 == $LkR10) goto GMKnInput16;
+if ($LkR16 == $LkR11) goto GMKnInput16;
+if ($LkR16 == $LkR12) goto GMKnInput16;
+if ($LkR16 == $LkR13) goto GMKnInput16;
+if ($LkR16 == $LkR14) goto GMKnInput16;
+if ($LkR16 == $LkR15) goto GMKnInput16;
+mes $LkR16;
+GMKnInput17:
+input $LkR17;
+if ($LkR17 < 1 || $LkR17 > 80) goto GMKnInput17;
+if ($LkR17 == $LkR1) goto GMKnInput17;
+if ($LkR17 == $LkR2) goto GMKnInput17;
+if ($LkR17 == $LkR3) goto GMKnInput17;
+if ($LkR17 == $LkR4) goto GMKnInput17;
+if ($LkR17 == $LkR5) goto GMKnInput17;
+if ($LkR17 == $LkR6) goto GMKnInput17;
+if ($LkR17 == $LkR7) goto GMKnInput17;
+if ($LkR17 == $LkR8) goto GMKnInput17;
+if ($LkR17 == $LkR9) goto GMKnInput17;
+if ($LkR17 == $LkR10) goto GMKnInput17;
+if ($LkR17 == $LkR11) goto GMKnInput17;
+if ($LkR17 == $LkR12) goto GMKnInput17;
+if ($LkR17 == $LkR13) goto GMKnInput17;
+if ($LkR17 == $LkR14) goto GMKnInput17;
+if ($LkR17 == $LkR15) goto GMKnInput17;
+if ($LkR17 == $LkR16) goto GMKnInput17;
+mes $LkR17;
+GMKnInput18:
+input $LkR18;
+if ($LkR18 < 1 || $LkR18 > 80) goto GMKnInput18;
+if ($LkR18 == $LkR1) goto GMKnInput18;
+if ($LkR18 == $LkR2) goto GMKnInput18;
+if ($LkR18 == $LkR3) goto GMKnInput18;
+if ($LkR18 == $LkR4) goto GMKnInput18;
+if ($LkR18 == $LkR5) goto GMKnInput18;
+if ($LkR18 == $LkR6) goto GMKnInput18;
+if ($LkR18 == $LkR7) goto GMKnInput18;
+if ($LkR18 == $LkR8) goto GMKnInput18;
+if ($LkR18 == $LkR9) goto GMKnInput18;
+if ($LkR18 == $LkR10) goto GMKnInput18;
+if ($LkR18 == $LkR11) goto GMKnInput18;
+if ($LkR18 == $LkR12) goto GMKnInput18;
+if ($LkR18 == $LkR13) goto GMKnInput18;
+if ($LkR18 == $LkR14) goto GMKnInput18;
+if ($LkR18 == $LkR15) goto GMKnInput18;
+if ($LkR18 == $LkR16) goto GMKnInput18;
+if ($LkR18 == $LkR17) goto GMKnInput18;
+mes $LkR18;
+GMKnInput19:
+input $LkR19;
+if ($LkR19 < 1 || $LkR19 > 80) goto GMKnInput19;
+if ($LkR19 == $LkR1) goto GMKnInput19;
+if ($LkR19 == $LkR2) goto GMKnInput19;
+if ($LkR19 == $LkR3) goto GMKnInput19;
+if ($LkR19 == $LkR4) goto GMKnInput19;
+if ($LkR19 == $LkR5) goto GMKnInput19;
+if ($LkR19 == $LkR6) goto GMKnInput19;
+if ($LkR19 == $LkR7) goto GMKnInput19;
+if ($LkR19 == $LkR8) goto GMKnInput19;
+if ($LkR19 == $LkR9) goto GMKnInput19;
+if ($LkR19 == $LkR10) goto GMKnInput19;
+if ($LkR19 == $LkR11) goto GMKnInput19;
+if ($LkR19 == $LkR12) goto GMKnInput19;
+if ($LkR19 == $LkR13) goto GMKnInput19;
+if ($LkR19 == $LkR14) goto GMKnInput19;
+if ($LkR19 == $LkR15) goto GMKnInput19;
+if ($LkR19 == $LkR16) goto GMKnInput19;
+if ($LkR19 == $LkR17) goto GMKnInput19;
+if ($LkR19 == $LkR18) goto GMKnInput19;
+mes $LkR19;
+GMKnInput20:
+input $LkR20;
+if ($LkR20 < 1 || $LkR20 > 80) goto GMKnInput20;
+if ($LkR20 == $LkR1) goto GMKnInput20;
+if ($LkR20 == $LkR2) goto GMKnInput20;
+if ($LkR20 == $LkR3) goto GMKnInput20;
+if ($LkR20 == $LkR4) goto GMKnInput20;
+if ($LkR20 == $LkR5) goto GMKnInput20;
+if ($LkR20 == $LkR6) goto GMKnInput20;
+if ($LkR20 == $LkR7) goto GMKnInput20;
+if ($LkR20 == $LkR8) goto GMKnInput20;
+if ($LkR20 == $LkR9) goto GMKnInput20;
+if ($LkR20 == $LkR10) goto GMKnInput20;
+if ($LkR20 == $LkR11) goto GMKnInput20;
+if ($LkR20 == $LkR12) goto GMKnInput20;
+if ($LkR20 == $LkR13) goto GMKnInput20;
+if ($LkR20 == $LkR14) goto GMKnInput20;
+if ($LkR20 == $LkR15) goto GMKnInput20;
+if ($LkR20 == $LkR16) goto GMKnInput20;
+if ($LkR20 == $LkR17) goto GMKnInput20;
+if ($LkR20 == $LkR18) goto GMKnInput20;
+if ($LkR20 == $LkR19) goto GMKnInput20;
+mes $LkR20;
+next;
+mes "[Keno Teller]";
+mes "Lottery rigged for next draw.";
+set $KENO_Rigged,1;
+close;
+}
+
+prontera,166,198,5	duplicate(klottery)	Keno Lotto Teller	817

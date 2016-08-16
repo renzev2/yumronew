@@ -1,0 +1,25 @@
+//costumize Npc by Jaco
+
+cell_game,150,163,4	script	Exit	459,{
+	mes "[PvP Warper]";
+	mes "Want to go out?";
+	next;
+	menu "Exit.",L_exit, "I think i'll stay.",L_stay;
+L_exit:
+	mes "[PvP warper]";
+	mes "Alright! bye!";
+	next;
+	warp "prontera",156,190;
+	announce "[ PvP Warper ] : "+strcharinfo(0)+" left the PvP Room.",bc_all;
+	end;
+
+L_stay:
+	mes "[Pvp Warper]";
+	mes "Brave!";
+	close;
+
+                OnInit:
+                waitingroom "PvP Exit",0;
+                end;
+
+}

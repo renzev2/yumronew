@@ -1,0 +1,749 @@
+//===== eAthena Script =======================================
+//= Rock Scissors Roulette Script
+//===== By: ==================================================
+//= acky (1.1)
+//===== Current Version: =====================================
+//= 1.3 [By. Themon]
+//===== Compatible With: =====================================
+//= Any eAthena Version
+//===== Description: =========================================
+//= Plays a hybrid Russian Roulette Rock Scissors Paper game.
+//===== Additional Comments: =================================
+//= 1.3 added cutin, put a price to play the game
+//= 1.3 added chance to get good prize if get higher counter
+//= 1.3 Fixes by Themon, Added double and triple risk in menu
+//= Prizes customisable, Added emotions.
+//= 1.2 Fixes by Blackthunder and me [Poki#3]
+//
+//============================================================
+
+prontera,149,194,4	script	Lucky Soldier	852,{
+	
+cutin "ein_soldier",2;
+	mes "^FF0000Lucky Soldier^000000";
+	set @counter,1;
+	set @risk,1;
+	set @gprice,5000;
+	mes "Hey ^0000FF" + strcharinfo(0) + "^000000! Up for Rock Scissors Roulette?";
+	next;
+	menu "^00FF00Low Risk Mode",PLAY,"^0000FFDouble the Risk",DRISK,"^FF0000Triple Crazy^000000",TRISK,"Explain the rules.",RULES,"Leave",LEAVE;
+Mothe:	
+	next;
+	menu "^00FF00Low Risk Mode",PLAY,"^0000FFDouble the Risk",DRISK,"^FF0000Triple Crazy^000000",TRISK,"Leave",LEAVE;
+
+
+SAME:
+	mes "^FF0000Draw! Again!^000000";
+	next;
+	goto PLAY;
+
+WIN:
+	mes "Oh! Men!, ^0000FFYou Win!^000000";
+	emotion 19;
+	next;
+	goto OPPPULL;
+
+LOSE:
+	emotion 18;
+	mes "Boo! Yah! ^0000FFYou Lose!^000000";
+	next;
+	goto YOUPULL;
+
+DRISK:
+	set @risk,(@risk+1);
+	mes "Prize and Risk are Now";
+	mes "^0000FFDoubled^000000";
+	next;
+	goto PLAY;
+TRISK:
+	set @risk,(@risk+2);
+	mes "Prize and Risk are Now";
+	mes "^FF0000Tripled^000000";
+	next;
+	goto PLAY;
+
+PLAY:
+	set @tprice,(@risk * @gprice);
+	if (zeny < @tprice) goto LEAVE;
+	mes "Rock... Paper...";
+	set @opp,rand (1,3);
+	menu "^0000FFROCK!",ROCK,"^FF0000SCISSORS!",SCISSORS,"^00FF00PAPER!^000000",PAPER;
+
+ROCK:
+  	if (@lastchoice == 1) set @opp,rand (1,3);
+  	if (@opp == 1) emotion 11;
+  	if (@opp == 2) emotion 10;
+  	if (@opp == 3) emotion 12;
+  	set @lastchoice,1;
+	if (@opp == 1) goto SAME;
+	if (@opp == 2) goto WIN;
+	if (@opp == 3) goto LOSE;
+
+SCISSORS:
+	if (@lastchoice == 2) set @opp,rand (1,2);
+  	if (@opp == 1) emotion 11;
+  	if (@opp == 2) emotion 10;
+  	if (@opp == 3) emotion 12;
+  	set @lastchoice,2;
+	if (@opp == 1) goto LOSE;
+	if (@opp == 2) goto SAME;
+	if (@opp == 3) goto WIN;
+
+PAPER:
+	if (@lastchoice == 3) set @opp,rand (2,3);
+  	if (@opp == 1) emotion 11;
+  	if (@opp == 2) emotion 10;
+  	if (@opp == 3) emotion 12;
+  	set @lastchoice,3;
+	if (@opp == 1) goto WIN;
+	if (@opp == 2) goto LOSE;
+	if (@opp == 3) goto SAME;
+
+YOUPULL:
+	if (@counter == 1) goto ONE;
+	if (@counter == 2) goto TWO;
+	if (@counter == 3) goto THREE;
+	if (@counter == 4) goto FOUR;
+	if (@counter == 5) goto FIVE;
+	if (@counter == 6) goto SIX;
+
+OPPPULL:
+	if (@counter == 1) goto ONEa;
+	if (@counter == 2) goto TWOa;
+	if (@counter == 3) goto THREEa;
+	if (@counter == 4) goto FOURa;
+	if (@counter == 5) goto FIVEa;
+	if (@counter == 6) goto SIXa;
+
+ONE:
+	set @counter,2;
+	mes "1 of 6";
+	set @pull,rand (1,6);
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+TWO:
+	set @counter,3;
+	mes "2 of 6";
+	set @pull,rand (1,5);
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+THREE:
+	set @counter,4;
+	mes "3 of 6";
+	set @pull,rand (1,4);
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+FOUR:
+	set @counter,5;
+	mes "4 of 6";
+	set @pull,rand (1,3);
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+FIVE:
+	set @counter,6;
+	mes "5 of 6";
+	set @pull,rand (1,2);
+	if (@pull == 1) set @pull,rand (1,2);
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+SIX:
+	mes "6 of 6";
+	mes "Say your prayers";
+	set @pull,1;
+	next;
+	if (@pull == 1) goto DIE;
+	if (@pull != 1) goto SAFE;
+
+ONEa:
+	set @counter,2;
+	mes "1 of 6";
+	set @pull,rand (1,6);
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+TWOa:
+	set @counter,3;
+	mes "2 of 6";
+	set @pull,rand (1,5);
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+THREEa:
+	set @counter,4;
+	mes "3 of 6";
+	set @pull,rand (1,4);
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+FOURa:
+	set @counter,5;
+	mes "4 of 6";
+	set @pull,rand (1,3);
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+FIVEa:
+	set @counter,6;
+	mes "5 of 6";
+	set @pull,rand (1,2);
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+SIXa:
+	mes "6 of 6";
+	mes "Say your prayers";
+	set @pull,1;
+	next;
+	if (@pull == 1) goto KILL;
+	if (@pull != 1) goto SAFE;
+
+SAFE:
+	emotion 32;
+	mes "*^0000FFClick^000000* whew...";
+	goto PLAY;
+
+DIE:
+	specialeffect2 183;
+	emotion 29;
+	percentheal -100,-100;
+	mes "*^0000FFClick^000000* *^FF0000BANG^000000*";
+	mes "You're dead!";
+	set zeny,zeny - @tprice;
+	mes "You Lose ^0000FF"+ @tprice +"^000000 Zeny";
+	close2;
+	cutin "",255;
+	end;
+
+
+KILL:
+	specialeffect 183;
+	emotion 28;
+	mes "*^0000FFClick^000000* *^FF0000BANG^000000*";
+	mes "OWWW @#$%^!! THAT HURT LIKE HELL!!";
+	next;
+	goto PRIZE;
+
+RULES:
+	mes "Ok here are the rules:";
+	mes "I have with me a ^FF00006^000000 chamber pistol with ^FF00001^000000 round. First we play ^FF0000Scissors ^00FF00Paper ^0000FFRock^000000. The loser pulls the trigger. The winner is whoever comes out best.";
+	mes "Beat me to win a prize.";
+	menu "Let me play.",Mothe,"No thanks.",LEAVE;
+
+
+PRIZE:
+	mes "^FF0000Congratulations^000000!";
+	mes "^0000FF" + strcharinfo(0) + "^000000";
+	close2;
+	cutin "",255;
+	set @prize,rand (1,(@counter * 10));
+	if (@prize == 1) goto P1;
+	if (@prize == 2) goto P2;
+	if (@prize == 3) goto P3;
+	if (@prize == 4) goto P4;
+	if (@prize == 5) goto P5;
+	if (@prize == 6) goto P6;
+	if (@prize == 7) goto P7;
+	if (@prize == 8) goto P8;
+	if (@prize == 9) goto P9;
+	if (@prize == 10) goto P10;
+	if (@prize == 11) goto P11;
+	if (@prize == 12) goto P12;
+	if (@prize == 13) goto P13;
+	if (@prize == 14) goto P14;
+	if (@prize == 15) goto P15;
+	if (@prize == 16) goto P16;
+	if (@prize == 17) goto P17;
+	if (@prize == 18) goto P18;
+	if (@prize == 19) goto P19;
+	if (@prize == 20) goto P20;
+	if (@prize == 21) goto P21;
+	if (@prize == 22) goto P22;
+	if (@prize == 23) goto P23;
+	if (@prize == 24) goto P24;
+	if (@prize == 25) goto P25;
+	if (@prize == 26) goto P26;
+	if (@prize == 27) goto P27;
+	if (@prize == 28) goto P28;
+	if (@prize == 29) goto P29;
+	if (@prize == 30) goto P30;
+	if (@prize == 31) goto P31;
+	if (@prize == 32) goto P32;
+	if (@prize == 33) goto P33;
+	if (@prize == 34) goto P34;
+	if (@prize == 35) goto P35;
+	if (@prize == 36) goto P36;
+	if (@prize == 37) goto P37;
+	if (@prize == 38) goto P38;
+	if (@prize == 39) goto P39;
+	if (@prize == 40) goto P40;
+	if (@prize == 41) goto P41;
+	if (@prize == 42) goto P42;
+	if (@prize == 43) goto P43;
+	if (@prize == 44) goto P44;
+	if (@prize == 45) goto P45;
+	if (@prize == 46) goto P46;
+	if (@prize == 47) goto P47;
+	if (@prize == 48) goto P48;
+	if (@prize == 49) goto P49;
+	if (@prize == 50) goto P50;
+	if (@prize == 51) goto P51;
+	if (@prize == 52) goto P52;
+	if (@prize == 53) goto P53;
+	if (@prize == 54) goto P54;
+	if (@prize == 55) goto P55;
+	if (@prize == 56) goto P56;
+	if (@prize == 57) goto P57;
+	if (@prize == 58) goto P58;
+	if (@prize == 59) goto P59;
+	if (@prize == 60) goto P60;
+	
+	
+
+P1:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 10);
+	mes "^0000FF"+ @Trisk +"^000000x Oridicon!";
+	getitem 984,@Trisk;
+	close;
+
+P2:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 10);
+	mes "^0000FF"+ @Trisk +"^000000x Elunium!";
+	getitem 985,@Trisk;
+	close;
+
+P3:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 15);
+	mes "^0000FF"+ @Trisk +"^000000x Oridicon!";
+	getitem 984,@Trisk;
+	close;
+
+P4:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 15);
+	mes "^0000FF"+ @Trisk +"^000000x Elunium!";
+	getitem 985,@Trisk;
+	close;
+
+P5:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Old Violet Box!";
+	getitem 617,@Trisk;
+	close;
+
+P6:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Old Card Album!";
+	getitem 616,@Trisk;
+	close;
+
+P7:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Garnet!";
+	getitem 718,@Trisk;
+	close;
+P8:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Amethyst!";
+	getitem 719,@Trisk;
+	close;
+
+
+P9:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Aquamarine!";
+	getitem 720,@Trisk;
+	close;
+P10:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Frozen Rose!";
+	getitem 749,@Trisk;
+	close;
+
+P11:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Emerald";
+	getitem 721,@Trisk;
+	close;
+P12:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Pearl!";
+	getitem 722,@Trisk;
+	close;
+
+P13:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Ruby!";
+	getitem 723,@Trisk;
+	close;
+
+P14:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Baphomet Doll!";
+	getitem 750,@Trisk;
+	close;
+
+P15:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Osiris Doll!";
+	getitem 751,@Trisk;
+	close;
+
+P16:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Sardonyx!";
+	getitem 725,@Trisk;
+	close;
+
+P17:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Sapphire!";
+	getitem 726,@Trisk;
+	close;
+
+P18:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Opal!";
+	getitem 727,@Trisk;
+	close;
+
+P19:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Topaz!";
+	getitem 728,@Trisk;
+	close;
+
+P20:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Witherless Rose!";
+	getitem 748,@Trisk;
+	close;
+
+P21:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Zircon!";
+	getitem 729,@Trisk;
+	close;
+
+P22:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x 1carat Diamond!";
+	getitem 730,@Trisk;
+	close;
+
+P23:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x 2carat Diamond!";
+	getitem 731,@Trisk;
+	close;
+
+P24:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x 1carat Diamond!";
+	getitem 730,@Trisk;
+	close;
+
+P25:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x 2carat Diamond!";
+	getitem 731,@Trisk;
+	close;
+
+P26:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x 3carat Diamond!";
+	getitem 732,@Trisk;
+	close;
+
+P27:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Crystal Mirror!";
+	getitem 747,@Trisk;
+	close;
+
+P28:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Crystal Mirror!";
+	getitem 747,@Trisk;
+	close;
+
+P29:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x 2carat Diamond!";
+	getitem 731,@Trisk;
+	close;
+P30:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x 3carat Diamond!";
+	getitem 732,@Trisk;
+	close;
+
+P31:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Anvil!";
+	getitem 986,@Trisk;
+	close;
+
+P32:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Anvil!";
+	getitem 986,@Trisk;
+	close;
+
+P33:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Seed of Life!";
+	getitem 7140,@Trisk;
+	close;
+
+P34:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Morning Dew of Yggdrasil!";
+	getitem 7141,@Trisk;
+	close;
+
+
+P35:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 3);
+	mes "^0000FF"+ @Trisk +"^000000x Morning Dew of Yggdrasil!";
+	getitem 7141,@Trisk;
+	close;
+
+
+P36:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Frozen Rose!";
+	getitem 749,@Trisk;
+	close;
+
+P37:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 4);
+	mes "^0000FF"+ @Trisk +"^000000x Crystal Mirror!";
+	getitem 747,@Trisk;
+	close;
+
+
+P38:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 4);
+	mes "^0000FF"+ @Trisk +"^000000x Baphomet Doll";
+	getitem 750,@Trisk;
+	close;
+
+P39:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 5);
+	mes "^0000FF"+ @Trisk +"^000000x Crystal Mirror!";
+	getitem 747,@Trisk;
+	close;
+
+P40:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Four Leaf Clover!";
+	getitem 706,@Trisk;
+	close;
+
+P41:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 6);
+	mes "^0000FF"+ @Trisk +"^000000x Crystal Mirror!";
+	getitem 747,@Trisk;
+	close;
+
+P42:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 6);
+	mes "^0000FF"+ @Trisk +"^000000x Osiris Doll!";
+	getitem 751,@Trisk;
+	close;
+
+P43:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 7);
+	mes "^0000FF"+ @Trisk +"^000000x Osiris Doll!";
+	getitem 751,@Trisk;
+	close;
+
+
+P44:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 4);
+	mes "^0000FF"+ @Trisk +"^000000x 2carat Diamond!";
+	getitem 731,@Trisk;
+	close;
+
+P45:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 20);
+	mes "^0000FF"+ @Trisk +"^000000x Raccoon Doll!";
+	getitem 754,@Trisk;
+	close;
+
+P46:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 18);
+	mes "^0000FF"+ @Trisk +"^000000x Yoyo Doll!";
+	getitem 753,@Trisk;
+	close;
+
+P47:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 26);
+	mes "^0000FF"+ @Trisk +"^000000x Rocker Doll";
+	getitem 752,@Trisk;
+	close;
+
+P48:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 28);
+	mes "^0000FF"+ @Trisk +"^000000x Rocker Doll";
+	getitem 752,@Trisk;
+	close;
+
+P49:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 30);
+	mes "^0000FF"+ @Trisk +"^000000x Rocker Doll!";
+	getitem 752,@Trisk;
+	close;
+
+P50:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Bag of Silver Coins!";
+	getitem 676,@Trisk;
+	close;
+
+
+P51:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Bag of Gold Coins!";
+	getitem 670,@Trisk;
+	close;
+
+P52:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 2);
+	mes "^0000FF"+ @Trisk +"^000000x Ora Ora!";
+	getitem 701,@Trisk;
+	close;
+
+P53:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 11);
+	mes "^0000FF"+ @Trisk +"^000000x Gold Coin!";
+	getitem 671,@Trisk;
+	close;
+
+P54:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 12);
+	mes "^0000FF"+ @Trisk +"^000000x Gold Coin!";
+	getitem 671,@Trisk;
+	close;
+
+P55:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 13);
+	mes "^0000FF"+ @Trisk +"^000000x Gold Coin!";
+	getitem 987,@Trisk;
+	close;
+
+
+P56:	
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Oridecon Anvil!";
+	getitem 671,@Trisk;
+	close;
+
+P57:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Gold!";
+	getitem 969,@Trisk;
+	close;
+
+P58:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Bag of Platinum Bullion";
+	getitem 7230,@Trisk;
+	close;
+
+P59:
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	set @Trisk,(@risk * 1);
+	mes "^0000FF"+ @Trisk +"^000000x Golden Anvil";
+	getitem 988,@Trisk;
+	close;
+
+P60:
+	set @Trisk,(@risk * 1);
+	Announce " " + strcharinfo(0) + " has won the Jackpot prize of "+ @Trisk +"x Emperium Anvil! ",8;
+	mes "You Got prize No. ^0000FF"+ @prize +"^000000";
+	mes "^0000FF"+ @Trisk +"^000000x Emperium Anvil";
+	getitem 989,@Trisk;
+	close;
+
+
+LEAVE:
+
+	mes "Must Have Atleast ^0000FF"+ @tprice +"^000000 Zeny to Play";
+	close2;
+	cutin "",255;
+	end;
+
+}

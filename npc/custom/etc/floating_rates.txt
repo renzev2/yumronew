@@ -1,0 +1,74 @@
+//===== eAthena Script ======================================================================
+//= Floating Server Rates
+//===== Original By =========================================================================
+//= Lupus
+//===== Current Version: ====================================================================
+//= 1.0
+//===== Compatible With: ====================================================================
+//= Any eAthena, that has 'setbattleflag' function
+//===== Description: ========================================================================
+//= It's a simply example of setbattleflag
+//= This script will change your server rates from 1x to 1.5x every 1 hours
+//= Note: It doesn't affect Card granted drops, MVP & Treasure Chests drops ^_-
+//=	It also doesn't affect CARD drops, because they are just 0.01%
+//===== Comments and Credits ================================================================
+//= You can make incredible scripts with 'setbattleflag'!
+//===========================================================================================
+
+
+prontera,3,4,5	script	FloatingRates	-1,{
+	end;
+OnInit:
+
+//add any other HOURS
+OnClock0059:
+OnClock0159:
+OnClock0259:
+OnClock0359:
+OnClock0459:
+OnClock0559:
+OnClock0659:
+OnClock0759:
+OnClock0859:
+OnClock0959:
+OnClock1059:
+OnClock1159:
+OnClock1259:
+OnClock1359:
+OnClock1459:
+OnClock1559:
+OnClock1659:
+OnClock1759:
+OnClock1859:
+OnClock1959:
+OnClock2059:
+OnClock2159:
+OnClock2259:
+OnClock2359:
+
+//-------------------
+	set $Monavail,0;
+	set $@brate,rand(100,190);
+	set $@jrate,rand(100,190);
+	set $@drate,rand(100,190);
+	set $@crate,rand(11,15);
+	//Base exp
+	setbattleflag("base_exp_rate",$@brate);
+	//Job exp
+	setbattleflag("job_exp_rate",$@jrate);
+	//Drops
+	setbattleflag("item_rate_common",$@drate);
+	setbattleflag("item_rate_heal",$@drate);
+	setbattleflag("item_rate_use",$@drate);
+	setbattleflag("item_rate_equip",$@drate);
+	setbattleflag("item_rate_card",$@crate);
+	//we don't change card drops rate, because these values won't change them anyway
+	atcommand "@reloadmobdb";
+	announce "Current Rune-Midgard rates are: 1."+($@brate-100)+"x 1."+($@jrate-100)+"x 1."+($@drate-100)+"x",bc_all,0xFF6060;
+	announce "Current Base Exp rates are: 1."+($@brate-100)+"x",bc_all,0x60FF60;
+	announce "Current Job Exp rates are: 1."+($@jrate-100)+"x",bc_all,0xFF6060;
+	announce "Current Drop rates are: 1."+($@drate-100)+"x",bc_all,0x00FF00;
+	announce "Current Card Drop rates are: 0.0"+($@crate-10)+"x",bc_all,0xFF6000;
+	Announce "New Monster Available for Summoning",8;
+	end;
+}

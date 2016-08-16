@@ -1,0 +1,22 @@
+    -	script	DayNight	-1,{
+        end;
+
+    OnClock0300:
+    OnClock0800:
+    OnInit:
+
+        set $@minutesfrommidnight, gettime(3)*60+gettime(2); 
+        set $@night_start, 180; // 03:00
+        set $@night_end, 480;   // 08:00 
+        if ($@minutesfrommidnight>=$@night_start && 
+            $@minutesfrommidnight<$@night_end) goto StartNight; 
+        goto StartDay;
+
+    StartNight:
+        night;
+        end;
+
+    StartDay:
+        day;
+        end;
+    } 

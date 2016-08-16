@@ -1,0 +1,433 @@
+/*//----------------------------------------------------------------//
+//----------------Scripted by Spera---------------------------------//
+//------------------FinalStrikeRO-----------------------------------//
+//--------------------Disguise Event NPC v2-------------------------//
+/-------------------------------------------------------------------//*/
+
+
+prontera,121,208,6	script	Disguise CP		968,{
+
+if (getgmlevel()<20)
+{
+	mes "^3399FF[Disguise CP]^000000";	
+	mes "Sorry, you are not a GM!";
+	close;
+}
+
+mes "^3399FF[Disguise CP]^000000";	
+mes "Hello GameMaster!";
+mes "What do you want to do?";
+switch(select("Start Event:Stop Event:Set number of rounds[^E50000"+$guessrounds+"^000000]:Set prize^E50000 ["+getitemname($guessprize)+"]^000000 ^E50000 ["+ $guessprizecount + "]^000000:Nothing"))
+{
+	case 1: 
+	{
+		next;
+		mes "^3399FF[Disguise CP]^000000";
+		mes "Please confirm by typing START."; 
+		input .@confirm$;          
+		if (.@confirm$ == "START") 
+		{
+			donpcevent "guessAnnouncer::OnGMStart"; 
+			close;
+		}
+		mes "Confirmation failed";
+		close;
+		break;
+	}
+	case 2:
+	{
+		next;
+		mes "^3399FF[Disguise CP]^000000";
+		mes "Please confirm by typing STOP."; 
+		input .@confirm$;          
+		if (.@confirm$ == "STOP") 
+		{
+			donpcevent "guessAnnouncer::OnGMStop";
+			close;
+		}
+		mes "Confirmation failed";
+		close;
+		break;
+		
+	}
+	
+	case 3:
+	{
+		next; mes "^3399FF[Disguise CP]^000000";
+		mes "Please type in the new number."; 
+		input $guessrounds; 
+		if ($guessrounds > 30) set $guessrounds, 30;
+		else if ($guessrounds < 1) set $guessrounds, 1;
+		close;
+	}
+	
+	case 4:
+	{
+		next; mes "^3399FF[Disguise CP]^000000";
+		mes "Please type in the new prize id."; 
+		input .@guessprizeid; 
+		if (getitemname(.@guessprizeid) == "null" || getitemname(.@guessprizeid) == "") {next; mes "^3399FF[Disguise CP]^000000"; mes "Error"; mes "This item does not exist in the database..."; close;}
+		set $guessprize, .@guessprizeid;
+		next; mes "^3399FF[Disguise CP]^000000";
+		mes "Please type in the amount."; 
+		input .@guessprizeamount;
+		if (!.@guessprizeamount) set .@guessprizeamount,1 ;
+		set $guessprizecount,.@guessprizeamount; 
+		next; mes "^3399FF[Disguise CP]^000000";
+		mes "Prize has been set to ^E50000 "+ getitemname($guessprize)+ "^000000 and the amount to ^E50000 " +$guessprizecount+"^000000";
+		close;
+	}
+	
+					
+	case 5:
+	{
+		next; mes "^3399FF[Disguise CP]^000000";
+		mes "Good bye"; 
+		close;
+	}
+
+}
+
+
+}
+
+
+
+
+
+
+
+
+quiz_02,162,350,4	script	Disguise NPC		933,{
+
+if (!$guessbegin)
+{
+	mes "^3399FF[Disguise NPC]^000000";
+	mes "The event is going to start soon!";
+	close;
+}
+end;
+
+OnStart:
+	set $guessbegin, 1;
+	set .DisguiseWon, 0;
+	if (!$DisguiseRound)
+	{
+		npctalk "Alright. Let's start this game!";
+		sleep 2000;
+		npctalk "But first I will explain the rules.";
+		sleep 2000;
+		npctalk "I am going to disguise into a random monster.";
+		sleep 2000;
+		npctalk "You have to guess the monster's name and shout it out.";
+		sleep 2000;
+		npctalk "Don't bother about the use of capital and small initial letters.";
+		sleep 2000;
+		npctalk "Now get ready!";
+		sleep 5000;
+	}
+	else if ($DisguiseRound < $guessrounds-1)
+	{
+		npctalk "Get ready for the next round.";
+		setnpctimer 0;
+		sleep 8000;
+	}
+	else
+	{	
+		npctalk "Last round now!";
+		sleep 2000;
+		npctalk "Get ready!";
+		sleep 6000;
+	}
+
+	do
+	{
+		set .@guessrepeat, 0;
+		set $monster, 1000 + rand(1,950);
+		for (set .@k, 0; .@k <getarraysize($Forbidden); set .@k, .@k+1)
+		{
+			if ($monster == $Forbidden[.@k]) 
+			{
+				set .@guessrepeat, 1;
+				break;
+			}
+		}
+	}
+	while (.@guessrepeat);
+	setnpctimer 0;
+	initnpctimer;
+	setnpcdisplay "Disguise NPC",$monster;
+	set $MonsterName$, strmobinfo(1,$monster);
+	defpattern 1, "([^:]+):.*\\s"+$MonsterName$+"(.*)", "winround";
+	activatepset 1;
+	npctalk "What's my name?";
+	sleep 3000;
+	npcwalkto 102,103;
+	sleep 2000;
+	npcwalkto 102,99;
+	end;
+	
+	OnTimer5000:
+		if (!.DisguiseWon)
+		{
+			sleep 3000;
+			npcwalkto 102,103;
+			sleep 2000;
+			npcwalkto 102,99;
+
+			if (!$guessactive)  {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+		}
+		end;
+
+
+	OnTimer15000:
+		if (!.DisguiseWon) 
+		{
+			sleep 3000;
+			npcwalkto 102,103;
+			sleep 2000;
+			npcwalkto 102,99;
+		}
+		end;
+
+	OnTimer25000:
+		if (!.DisguiseWon) 
+		{
+			npctalk "You get 10 more seconds to guess my name.";
+			sleep 3000;
+			npcwalkto 102,103;
+			sleep 2000;
+			npcwalkto 102,99;
+		}
+		end;
+
+	OnTimer35000:
+		if (!.DisguiseWon)
+		{ 
+			npctalk "Round is over.";
+			if (!$guessactive)  {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+			set $DisguiseRound, $DisguiseRound + 1;
+			deletepset 1;
+			sleep 3000;
+			npctalk $MonsterName$ + " would have been the correct answer.";
+			sleep 5000;
+			if ($DisguiseRound >= $guessrounds)
+			{
+				set $DisguiseRound, 0;
+				sleep 3000;
+				npctalk "Event is over now!";
+				sleep 3500;
+				npctalk "See ya!";
+				sleep 2000;
+				emotion 12;
+				sleep 1000;
+				set $guessactive, 0;
+				mapwarp "quiz_02","prontera.gat",156,191;
+				setnpcdisplay "Disguise NPC",933;
+				disablenpc "Disguise NPC";
+				end;
+			}
+			goto OnStart;
+		}
+		end;
+
+	winround:
+		setnpctimer 0;
+		deletepset 1;
+		set .DisguiseWon, 1;
+		set $DisguiseRound, $DisguiseRound + 1;
+		npctalk strcharinfo(0) + " got my right name!";
+		getitem $guessprize, $guessprizecount;
+		sleep2 3000;
+		npctalk $MonsterName$ + " is the correct answer.";
+		if (!$guessactive)  {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+		if ($DisguiseRound >= $guessrounds)
+			{
+				set $DisguiseRound, 0;
+				set $guessactive, 0;
+				sleep 3000;
+				npctalk "Event is over now!";
+				sleep 3500;
+				npctalk "See ya!";
+				sleep 2000;
+				emotion 12;
+				sleep 1000;
+				mapwarp "quiz_02","prontera",156,191;
+				setnpcdisplay "Disguise NPC",933;
+				disablenpc "Disguise NPC";
+				end;
+			}
+		sleep 5000;
+		goto OnStart;
+		end;
+
+	
+
+}
+
+//-----------------------------------------------------------------------------------
+//-----------------------------------------------------------------------------------
+
+-	script	guessAnnouncer	-1,{
+
+
+OnGMStart:
+	if ($guessactive) end;
+	set $guessactive, 1;
+	announce "The server is starting a Disguise Event now!",0;
+	set $guessbegin, 0;
+	sleep 3000;
+	if (!$guessactive) end;
+	announce "If you want to join, come to prontera 124 209.",0;
+	enablenpc "guesswarp";
+	enablenpc "Disguise NPC";
+	sleep 3000;
+	announce "Number of Rounds: "+$guessrounds,0;
+	sleep 2000;
+	announce "Prize per round: "+ getitemname($guessprize) + " x " + $guessprizecount,0;
+	sleep 2000;
+	if (!$guessactive) {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+	announce "The portal is going to close in one minute.",0;  
+	sleep 60000;
+	if (!$guessactive) {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+	announce "The portal has been closed.",0;
+	disablenpc "guesswarp";
+	set $DisguiseRound, 0;
+	sleep 5000;
+	if (!$guessactive) {disablenpc "Disguise NPC"; end;}
+	if(getmapusers("quiz_02") == 0) 
+	{
+		disablenpc "Disguise NPC";
+		set $guessactive, 0;
+		end;
+	}
+
+	donpcevent "Disguise NPC::OnStart";
+	end;
+
+OnGMStop:
+		if ($guessactive)
+		{
+			set $guessactive, 0;
+			announce "The disguise event has been stopped.",0;
+			set $DisguiseRound, 0;
+			mapwarp "quiz_02","prontera",156,191;
+			setnpcdisplay "Disguise NPC",933;
+			disablenpc "Disguise NPC";
+			disablenpc "guesswarp";
+		}
+		end;
+
+
+OnClock0040:
+OnClock0080:
+OnClock0120:
+OnClock0160:
+OnClock0200:
+OnClock0240:
+OnClock0280:
+OnClock0320:
+OnClock0360:
+OnClock0400:
+OnClock0440:
+OnClock0480:
+OnClock0520:
+OnClock0560:
+OnClock0600:
+OnClock0640:
+OnClock0680:
+OnClock0720:
+OnClock0760:
+OnClock0800:
+OnClock0840:
+OnClock0880:
+OnClock0920:
+OnClock0960:
+OnClock1000:
+OnClock1040:
+OnClock1080:
+OnClock1120:
+OnClock1160:
+OnClock1200:
+OnClock1240:
+OnClock1280:
+OnClock1320:
+OnClock1360:
+OnClock1400:
+OnClock1440:
+OnClock1480:
+OnClock1520:
+OnClock1560:
+OnClock1600:
+OnClock1640:
+OnClock1680:
+OnClock1720:
+OnClock1760:
+OnClock1800:
+OnClock1840:
+OnClock1880:
+OnClock1920:
+OnClock1960:
+OnClock2000:
+OnClock2040:
+OnClock2080:
+OnClock2120:
+OnClock2160:
+OnClock2200:
+OnClock2240:
+OnClock2280:
+OnClock2320:
+OnClock2360:
+OnClock2400:
+	if ($guessactive) end;
+	set $guessactive, 1;
+	announce "The server is starting a Disguise Event now!",0;
+	set $guessbegin, 0;
+	sleep 3000;
+	if (!$guessactive) end;
+	announce "If you want to join, come to prontera 124 209.",0;
+	enablenpc "guesswarp";
+	enablenpc "Disguise NPC";
+	sleep 2000;
+	announce "Prize per round: "+ getitemname($guessprize) + " x " + $guessprizecount,0;
+	sleep 2000;
+	if (!$guessactive)  {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+	announce "The portal is going to close in one minute.",0;  
+	sleep 60000;
+	if (!$guessactive)  {disablenpc "guesswarp"; disablenpc "Disguise NPC"; end;}
+	announce "The portal has been closed.",0;
+	disablenpc "guesswarp";
+	sleep 5000;
+	if (!$guessactive)  {disablenpc "Disguise NPC"; end;}
+	announce "Next Event will start in 40 minutes.",0;
+	set $DisguiseRound, 0;
+	if(getmapusers("quiz_02") == 0) 
+	{
+		disablenpc "Disguise NPC";
+		set $guessactive, 0;
+		end;
+	}
+
+	donpcevent "Disguise NPC::OnStart";
+	end;
+
+OnInit:
+	disablenpc "Disguise NPC";
+	disablenpc "guesswarp";
+	set $guessactive, 0;
+	setarray $Forbidden[0],1003,1006,1017,1021,1022,1027,1043,1136,1137,1168,1171,1172,1173,1181,1210,1217,1218,1223,1284,1325,1326,1327,1328,1329,1330,1331,1332,1333,1334,1335,1336,1337,1338,1339,1340,1341,1342,1343,1344,1345,1346,1347,1348,1349,1350,1351,1352,1353,1354,1355,1356,1357,1358,1359,1360,1361,1362,1363,1407,1411,1414,1496,1501,1900,1948,1892,1949,1950,1983,1984,2010,1003,1006,1017,1021,1022,1027,1043,1075,1136,1137,1168,1171,1172,1173,1181,1210,1222,1223,1224,1225,1226,1227,1228,1233,1284,1407,1411,1414,1496,1501,1900,1996,2002,2003,2004,2005,2006,2007,2011,2012,2025,2028,2029,2030,2031,2032,2033,2034,2035,2036,2037,2038,2039,2040,2041,2042,2043,2044,2045,2046,2047,2048,2049,2050,2051,2052,2053,2054,2055,2056,2057,2058,2059,2060,2061,2062,2063,2064,2065,2066,2067,2075,2076,2077,2078,2079,2080,2081,2084,2093,2094,2095,2096,2097,2098,2099,2100,2101,2102,2103,2104,2105,2106,2107,2108,2109,2110,2111,2112,2113,2114,2115,2116,2117,2118,2119,2120,2121,2122,2123,2124,2125,1900,1901,1902,1903,1237,1239,1145,1175,1209,1841,1842,1843,1844,3014,3001,3002,2114,2115,2117,2118,2119,2120,6049,6050,6051,6052,2200,2205,2207;
+
+}
+
+//-----------------------------------------------------------------------------------
+//------------------Warp Portal------------------------------------------------------
+prontera,124,209,0	warp	guesswarp	2,2,quiz_02,162,346	
+//-----------------------------------------------------------------------------------
+//------------------Map Flags--------------------------------------------------------
+quiz_02	mapflag	nowarpto
+quiz_02	mapflag	noskill
+quiz_02	mapflag	nosave
+quiz_02	mapflag	nomemo
+quiz_02	mapflag	noteleport
+quiz_02	mapflag	nowarp
+//-----------------------------------------------------------------------------------

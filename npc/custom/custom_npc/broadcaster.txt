@@ -1,0 +1,54 @@
+//Script by jaco
+
+prontera,147,174,5	script	Broadcaster	894,{
+	
+	set @npcname$, "Broadcaster";
+	set @header$,"[^0000ff" + @npcname$ + "^000000]";
+
+	set broadcastfee, 1000000;
+
+	//if (agitcheck()){mes @header$; mes "War of Emperium is ongoing!"; close;}
+
+	mes @header$;
+	mes "Hi, I'm the Broadcaster";
+	mes "I can Broadcast a message for you";
+	next;
+	mes @header$;
+	mes "It costs ^ff0000"+ broadcastfee +"^000000 zeny ";
+	next;
+	mes @header$;
+	mes "Would you like to Broadcast?";
+	switch (select("-yes","-No")){
+	case 1:
+		if(Broadcast> gettimetick(2)) {
+		next;
+		mes @header$;
+		mes "Sorry you have to wait for 3min.";
+		close;
+		}
+		next;
+		mes @header$;
+		if(Zeny<1000000) goto $nozenybc;
+		set Zeny,zeny - broadcastfee;
+		mes "Please input your message.";
+		next;
+		input broadcast$;
+		announce "["+strcharinfo(0)+"]: "+broadcast$+"",0,0xFFA500; // Edit FFA500 to green color code
+		close2;
+		set Broadcast, gettimetick(2)+180;
+		dispbottom "Broadcaster: Please wait for 3min until next broadcast to avoid flooding.";
+		end;
+	case 2:
+		mes "Suit yourself";
+		close;
+}
+
+$nozenybc:
+	mes "I have to check that you have";
+	mes "enough money";
+	next;
+	mes @header$;
+	mes "Im sorry but you dont have ^ff0000"+broadcastfee+"^000000 zeny";
+	mes "Go get it if you want to Broadcast";
+	close;
+}

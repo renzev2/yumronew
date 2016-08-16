@@ -1,0 +1,12 @@
+//customize pvp room
+//by Jaco
+
+prontera,161,184,4	script	PvP Warper	459,{
+	switch(select("PvP room [ "+getmapusers("cell_game")+" / 50 ]")){
+	warp "cell_game",0,0;
+	announce "[ PvP Warper ] : "+strcharinfo(0)+" entered PvP Room.",bc_all;
+                OnInit:
+                waitingroom "PvP Room",0;
+                end;
+}
+}

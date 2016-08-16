@@ -1,0 +1,39 @@
+prontera,162,184,5	script	Gift	864,{
+
+
+	if(##sorry == 1) goto L_1;
+	mes "You will receive Some Present as a reward for supporting the server";
+	mes "We're gladly thankful for your support in the future too.";
+	next;
+	//if(checkweight(2504,1) == 0 ) goto L_OverWeight;
+	getitem2 2504,1,1,10,0,0,0,0,0; // +10 muffler[1]
+	getitem2 2104,1,1,10,0,0,0,0,0; // +10 buckler[1]
+	getitem2 2102,1,1,10,0,0,0,0,0; // +10 Guard[1]
+	getitem2 2404,1,1,10,0,0,0,0,0; // +10 Shoes[1]
+	getitem2 2607,1,1,10,0,0,0,0,0; // +10 Clip[1]
+	getitem2 2607,1,1,10,0,0,0,0,0; // +10 Clip[1]
+	getitem2 4264,1,0,0,0,0,0,0,0;  // Wind Ghost Card
+	set Zeny,zeny+1000;
+	emotion e_thx;
+	set ##sorry,1;
+	close;
+
+	OnInit:
+	waitingroom "Reedem NPC For newbie",0;
+	end;
+
+
+
+L_OverWeight:
+	mes "kamu sudah lebih berat badan kamu sendiri dan tidak boleh mengangkat barang ini";
+	emotion e_omg;
+	close;
+
+
+
+L_1:
+	mes "You had already received before the gift.";
+	emotion e_bzz;
+	close;
+
+}

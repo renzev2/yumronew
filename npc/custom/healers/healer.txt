@@ -1,0 +1,52 @@
+-	script	Healer	-1,{
+	percentheal 100,100;
+	specialeffect2 EF_INCAGILITY; sc_start SC_INCREASEAGI,240000,10;
+	specialeffect2 EF_BLESSING; sc_start SC_BLESSING,240000,10;
+	while (getbrokenid(1)) {
+	repair(1);
+	set .@i, .@i +1;
+}
+if (.@i) dispbottom .@i + " items repaired.";
+
+getinventorylist;
+        for( set .@i,0; .@i < @inventorylist_count; set .@i, .@i +1 ) {
+                if ( @inventorylist_identify[.@i] == 1 ) continue;
+                delitem2 @inventorylist_id[.@i],1,0,0,0,0,0,0,0;
+                getitem @inventorylist_id[.@i],1;
+                set .@count, .@count +1;
+        }
+        if (.@count) dispbottom .@count +" items identified.";
+end;
+}
+
+// Duplicates
+//============================================================
+alberta,25,240,6	duplicate(Healer)	Healer#alb	742
+aldebaran,135,118,6	duplicate(Healer)	Healer#alde	742
+amatsu,200,79,4	duplicate(Healer)	Healer#ama	742
+ayothaya,207,169,6	duplicate(Healer)	Healer#ayo	742
+comodo,184,158,6	duplicate(Healer)	Healer#com	742
+einbech,57,36,6	duplicate(Healer)	Healer#einbe	742
+einbroch,57,202,6	duplicate(Healer)	Healer#einbr	742
+geffen,115,72,6	duplicate(Healer)	Healer#gef	742
+gonryun,156,122,6	duplicate(Healer)	Healer#gon	742
+hugel,89,150,6	duplicate(Healer)	Healer#hug	742
+izlude,125,118,5	duplicate(Healer)	Healer#izl	742
+jawaii,250,139,4	duplicate(Healer)	Healer#jaw	742
+lighthalzen,152,100,6	duplicate(Healer)	Healer#lhz	742
+louyang,226,103,4	duplicate(Healer)	Healer#lou	742
+manuk,272,144,6	duplicate(Healer)	Healer#man	742
+mid_camp,203,289,6	duplicate(Healer)	Healer#mid	742
+moc_ruins,72,164,4	duplicate(Healer)	Healer#moc	742
+morocc,153,97,6	duplicate(Healer)	Healer#mor	742
+moscovia,220,191,4	duplicate(Healer)	Healer#mos	742
+niflheim,212,182,5	duplicate(Healer)	Healer#nif	742
+payon,179,106,4	duplicate(Healer)	Healer#pay	742
+prontera,152,184,6	duplicate(Healer)	Healer#prt	742
+rachel,125,116,6	duplicate(Healer)	Healer#rac	742
+splendide,201,153,4	duplicate(Healer)	Healer#spl	742
+thor_camp,249,74,4	duplicate(Healer)	Healer#thor	742
+umbala,105,148,3	duplicate(Healer)	Healer#umb	742
+veins,217,121,4	duplicate(Healer)	Healer#ve	742
+xmas,143,136,4	duplicate(Healer)	Healer#xmas	742
+yuno,164,45,4	duplicate(Healer)	Healer#yuno	742

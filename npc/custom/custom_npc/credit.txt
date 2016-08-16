@@ -1,0 +1,67 @@
+//custom credit exchanger by jaco
+//=================================================================================================
+//
+prontera,164,165,4	script	Credit Exchanger	416,{
+ 
+//====================================[Customization Area]==========================//
+                set .npcname$,"^0000EE[Credit Exchanger]^000000"; //NPC Name
+                set .coinname$,"^0000EECredit^000000"; //Name of Item as Coin Used
+                set .CoinID,30400; // Credit ID Set to Red Potion
+                set .zeny,10000000; // Credit Price Set by 10,000,000 or 10m
+                set .capzeny,2000000000; //Zeny Capacity Set by 2,000,000,000 or 2b
+//==============================================================================//
+// Check Line 89 To Edit The Chat/Pub Name Like This:
+//              waitingroom "Credit Exchanger",0;
+//==============================================================================//
+ 
+                PlayerMode:
+                mes .npcname$;
+                mes "Hello there "+strcharinfo(0);
+                mes "Rule's Of Exchange";
+                mes "1 ^0000EE"+.coinname$+"^000000 is [^0000EE"+.zeny+"z^000000]";
+                mes "Zeny Exchange Capacity is [^0000EE"+.capzeny+"z^000000]";
+                switch(select("(Credits) to (Zeny):(Zeny) to (Credits)")) {
+        Case 1:
+                next;
+                mes .npcname$; 
+                mes "How many Credits to exchange?";
+                mes "Put The Credit Amount";
+                mes "Put  ^0000EE[0]^000000 to Cancel";
+                mes "1 ^0000EE"+.coinname$+"^000000 is [^0000EE"+.zeny+"z^000000]";
+                mes "Zeny Exchange Capacity is [^0000EE"+.capzeny+"z^000000]";
+                next;
+                do{
+                input @Credit,0,countitem(.CoinID);
+                if( @Credit < 1 ) close;
+                }while( ( ( @Credit * .zeny ) + Zeny ) > .capzeny );
+                next;
+                mes .npcname$;
+                mes "Thanks";
+                delitem .CoinID,@Credit;
+                set Zeny, Zeny + ( @Credit * .zeny );
+                close;
+ 
+        Case 2:
+                next;
+                mes .npcname$; 
+                mes "How much Credit you like to Gain?";
+                mes "Put The Credit Amount";
+                mes "Put  ^0000EE[0]^000000 to Cancel";
+                mes "1 ^0000EE"+.coinname$+"^000000 is [^0000EE"+.zeny+"z^000000]";
+                mes "Zeny Exchange Capacity is [^0000EE"+.capzeny+"z^000000]";
+                next;
+                input @Credit,0,( Zeny / .zeny );
+                if( @Credit < 1 ) close;
+                next;
+                mes .npcname$;
+                mes "Thanks.";
+                set Zeny, Zeny - ( @Credit * .zeny);
+                getitem .CoinID,@Credit;
+                close;
+ 
+                OnInit:
+                waitingroom "Credit Exchanger",0;
+                end;
+        }
+close;
+}

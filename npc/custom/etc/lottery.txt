@@ -1,0 +1,458 @@
+//===== eAthena Script =======================================
+//= Lottery Script
+//===== By: ==================================================
+//= acky - god@acky.com
+//===== Current Version: =====================================
+//= 1.2.1a
+//===== Compatible With: =====================================
+//= Any eAthena Version
+//===== Description: =========================================
+//= Daily lottery draw.
+//===== Additional Comments: =================================
+//= Numbers drawn daily (Time is configured line 29)
+//= *Added GM-Riggability
+//= *Ability to renew ticket
+//= *Improved interface
+//= *Fixed minor bug where first load didn't work.
+//= 1.2.1a fix due to new script engine
+//============================================================
+
+prontera,2,2,1	script	olotterygenerator	816,{
+OnInit:
+waitingroom "Let's Play Lotto",0;
+set $LA_TicketPrice,1000; // TICKET COST
+set $LA_Prize_Money,5000000; // JACKPOT AMOUNT
+set $LA_Prize_Money_Small,1000000; // SECONDARY PRIZE
+if ($LaID == 0) goto LA_GenID;
+end;
+
+//Modify for own time
+OnClock2045:
+// CHECKS IF LOTTERY IS RIGGED
+if ($LA_Rigged == 1) goto LA_Rigged_Draw;
+// GENERATES RANDOM NUMBERS 1-42
+APick1:
+set $LaW1,rand (1,42);
+
+APick2:
+set $LaW2,rand (1,42);
+if ($LaW2 == $LaW1) goto APick2;
+
+APick3:
+set $LaW3,rand (1,42);
+if ($LaW3 == $LaW2) goto APick3;
+if ($LaW3 == $LaW1) goto APick3;
+
+APick4:
+set $LaW4,rand (1,42);
+if ($LaW4 == $LaW2) goto APick4;
+if ($LaW4 == $LaW1) goto APick4;
+if ($LaW4 == $LaW3) goto APick4;
+
+APick5:
+set $LaW5,rand (1,42);
+if ($LaW5 == $LaW1) goto APick5;
+if ($LaW5 == $LaW2) goto APick5;
+if ($LaW5 == $LaW3) goto APick5;
+if ($LaW5 == $LaW4) goto APick5;
+
+APick6:
+set $LaW6,rand (1,42);
+if ($LaW6 == $LaW1) goto APick6;
+if ($LaW6 == $LaW2) goto APick6;
+if ($LaW6 == $LaW3) goto APick6;
+if ($LaW6 == $LaW4) goto APick6;
+if ($LaW6 == $LaW5) goto APick6;
+
+// BROADCASTS DRAW
+LA_Broadcast:
+Announce "Lottery: Welcome to tonight's 6/42 Lotto draw!",8;
+Announce "The numbers are as follows: [" + $LaW1 + "] [" + $LaW2 + "] [" + $LaW3 + "] [" + $LaW4 + "] [" + $LaW5 + "] [" + $LaW6 + "]",8;
+Announce "Congratulations to the winners of tonight!",8;
+
+// GENERATES DRAW ID CODE
+LA_GenID:
+set $LaID2,$LaID;
+// SETS TOMORROW'S ID NUMBER
+set $LaID,rand (100000,999999);
+end;
+
+// SETS DRAW TO RIGGED NUMBERS
+LA_Rigged_Draw:
+set $LaW1,$LaR1;
+set $LaW2,$LaR2;
+set $LaW3,$LaR3;
+set $LaW4,$LaR4;
+set $LaW5,$LaR5;
+set $LaW6,$LaR6;
+set $LA_Rigged,0;
+goto LA_Broadcast;
+}
+
+// BEGIN LOTTERY SCRIPT
+-	script	olottery	76,{
+LA_Begin:
+mes "[Lottery]";
+mes "Winning 6/42 Lotto Numbers ("+$LaID2+"):";
+mes "^0000FF[" + $LaW1 + "] [" + $LaW2 + "] [" + $LaW3 + "] [" + $LaW4 + "] [" + $LaW5 + "] [" + $LaW6 + "]^000000";
+if ($LaID > 99999) mes "Your Ticket ("+#LaID+"):";
+if ($LaID > 99999) mes "^FF0000[" + #LaW1 + "] [" + #LaW2 + "] [" + #LaW3 + "] [" + #LaW4 + "] [" + #LaW5 + "] [" + #LaW6 + "]^000000";
+mes "Next Draw-ID: ^FF0000" + $LaID + "^000000.";
+next;
+if (getgmlevel() > 90) goto LA_GM;
+menu "Claim Prize",LA_Claim,"Buy New Ticket",LA_Buy,"Cancel",LA_Cancel;
+
+// PURCHASE TICKET
+LA_Buy:
+if (#LaID == $LaID && #LaW1 != 0) goto LA_DoubleTicket;
+mes "[Lottery]";
+mes "Tickets cost ^0000FF" + $LA_TicketPrice + "z^000000.";
+mes "The Jackpot is ^FF0000" + $LA_Prize_Money + "z^000000.";
+next;
+menu "Buy Ticket",-,"Cancel",LA_Cancel;
+if (zeny < $LA_TicketPrice) goto LA_NoZeny;
+set zeny,zeny-$LA_TicketPrice;
+mes "[Lottery]";
+mes "Would you like your numbers hand Picked or computer generated?";
+next;
+menu "Computer Generated",LA_ComputerGen,"Hand Picked",LA_HandPick,"Renew Ticket",LA_Renew;
+
+// RENEW LAST TICKET
+LA_Renew:
+if ($LaID < 99999) goto LA_Invalid;
+set #LaID,$LaID;
+goto LA_Confirm2;
+
+LA_ComputerGen:
+// SELECTS RANDOM NUMBERS
+set @La1,0;
+set @La2,0;
+set @La3,0;
+set @La4,0;
+set @La5,0;
+set @La6,0;
+APick1:
+set @La1,rand (1,42);
+APick2:
+set @La2,rand (1,42);
+if (@La2 == @La1) goto APick2;
+APick3:
+set @La3,rand (1,42);
+if (@La3 == @La2) goto APick3;
+if (@La3 == @La1) goto APick3;
+APick4:
+set @La4,rand (1,42);
+if (@La4 == @La2) goto APick4;
+if (@La4 == @La1) goto APick4;
+if (@La4 == @La3) goto APick4;
+APick5:
+set @La5,rand (1,42);
+if (@La5 == @La1) goto APick5;
+if (@La5 == @La2) goto APick5;
+if (@La5 == @La3) goto APick5;
+if (@La5 == @La4) goto APick5;
+APick6:
+set @La6,rand (1,42);
+if (@La6 == @La1) goto APick6;
+if (@La6 == @La2) goto APick6;
+if (@La6 == @La3) goto APick6;
+if (@La6 == @La4) goto APick6;
+if (@La6 == @La5) goto APick6;
+mes "[Lottery]";
+mes "The computer has selected the following numbers:";
+mes "^0000FF" + @La1 + " " + @La2 + " " + @La3 + " " + @La4 + " " + @La5 + " " + @La6 + "^000000";
+next;
+menu "Confirm",LA_Confirm,"Re-Generate",LA_ComputerGen;
+
+// HAND Pick LOTTERY NUMBERS
+LA_HandPick:
+mes "[Lottery]";
+mes "Please Pick your numbers (1-42):";
+set @La1,0;
+set @La2,0;
+set @La3,0;
+set @La4,0;
+set @La5,0;
+set @La6,0;
+aInput1:
+input @La1;
+if (@La1 < 1 || @La1 > 42) goto aInput1;
+mes @La1;
+aInput2:
+input @La2;
+if (@La2 < 1 || @La2 > 42) goto aInput2;
+if (@La2 == @La1) goto aInput2;
+mes @La2;
+aInput3:
+input @La3;
+if (@La3 < 1 || @La3 > 42) goto aInput3;
+if (@La3 == @La1) goto aInput3;
+if (@La3 == @La2) goto aInput3;
+mes @La3;
+aInput4:
+input @La4;
+if (@La4 < 1 || @La4 > 42) goto aInput4;
+if (@La4 == @La1) goto aInput4;
+if (@La4 == @La2) goto aInput4;
+if (@La4 == @La3) goto aInput4;
+mes @La4;
+aInput5:
+input @La5;
+if (@La5 < 1 || @La5 > 42) goto aInput5;
+if (@La5 == @La1) goto aInput5;
+if (@La5 == @La2) goto aInput5;
+if (@La5 == @La3) goto aInput5;
+if (@La5 == @La4) goto aInput5;
+mes @La5;
+aInput6:
+input @La6;
+if (@La6 < 1 || @La6 > 42) goto aInput6;
+if (@La6 == @La1) goto aInput6;
+if (@La6 == @La2) goto aInput6;
+if (@La6 == @La3) goto aInput6;
+if (@La6 == @La4) goto aInput6;
+if (@La6 == @La5) goto aInput6;
+mes @La6;
+next;
+mes "[Lottery]";
+mes "Your numbers are:";
+mes "^0000FF" + @La1 + " " + @La2 + " " + @La3 + " " + @La4 + " " + @La5 + " " + @La6 + "^000000";
+next;
+menu "Confirm",LA_Confirm,"Re-Pick",LA_HandPick;
+
+LA_Confirm:
+set #LaW1,@La1;
+set #LaW2,@La2;
+set #LaW3,@La3;
+set #LaW4,@La4;
+set #LaW5,@La5;
+set #LaW6,@La6;
+set #LaID,$LaID;
+LA_Confirm2:
+mes "[Lottery]";
+mes "The live broadcasted draw is at 9pm.";
+mes "You can claim your ticket between then and the next draw.";
+next;
+mes "[Lottery]";
+mes "Good luck!";
+close;
+
+LA_Claim:
+// CHECKS TICKET VALIDILITY
+if (#LaID != $LaID2) goto LA_Invalid;
+// CHECKS HOW MANY NUMBERS MATCHED
+set @LaPrize,0;
+if (#LaW1 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW1 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW1 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW1 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW1 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW1 == $LaW6) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW2 == $LaW6) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW3 == $LaW6) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW4 == $LaW6) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW5 == $LaW6) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW1) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW2) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW3) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW4) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW5) set @LaPrize,@LaPrize+1;
+if (#LaW6 == $LaW6) set @LaPrize,@LaPrize+1;
+
+if (@LaPrize == 6) goto LaWinBig;
+if (@LaPrize > 3 && @LaPrize < 6) goto LaWinSmall;
+
+// NO WINNER
+mes "[Lottery]";
+mes "Bad luck, it appears you do not hold a winning ticket.";
+next;
+mes "[Lottery]";
+mes "Better luck next time!.";
+close;
+
+// MATCHED ALL SIX
+LaWinBig:
+mes "[Lottery]";
+mes "You have matched all six numbers!";
+mes "Jackpot!";
+mes "You've won ^0000FF" + $LA_Prize_Money + "z^000000.";
+set zeny,zeny+$LA_Prize_Money;
+Announce "Lottery: " + strcharinfo(0) + " has won the JACKPOT of " + $LA_Prize_Money + "z!",8;
+set #LaID,0;
+close;
+
+// MATCHED AT LEAST 4
+LaWinSmall:
+mes "[Lottery]";
+mes "You have matched at least 4 numbers!";
+mes "You've won ^0000FF" + $LA_Prize_Money_Small + "z^000000.";
+set zeny,zeny+$LA_Prize_Money_Small;
+Announce "Lottery: " + strcharinfo(0) + " has won a prize of " + $LA_Prize_Money_Small + "z!",8;
+set #LaID,0;
+close;
+
+// NO ZENY
+LA_NoZeny:
+mes "[Lottery]";
+mes "You can't afford a lottery ticket.";
+close;
+
+// INVALID TICKET
+LA_Invalid:
+mes "[Lottery]";
+mes "I'm sorry but it appears that you have an invalid ticket.";
+close;
+
+// DOUBLE TICKET
+LA_DoubleTicket:
+mes "[Lottery]";
+mes "It appears that you already have a ticket for today.";
+mes "You may only purchase one ticket per draw.";
+close;
+
+LA_Cancel:
+mes "[Lottery]";
+mes "Come back soon!";
+close;
+
+// GM MENU (Lets you manually do draws)
+LA_GM:
+menu "Claim Prize",LA_Claim,"Buy New Ticket",LA_Buy,"[GM]Do Draw Now",-,"[GM]Rig the Lottery",LA_GM_Rig,"Cancel",LA_Cancel;
+
+// CHECKS IF LOTTERY IS RIGGED
+if ($LA_Rigged == 1) goto LA_Rigged_Draw;
+// GENERATES RANDOM NUMBERS 1-42
+GMAPick1:
+set $LaW1,rand (1,42);
+
+GMAPick2:
+set $LaW2,rand (1,42);
+if ($LaW2 == $LaW1) goto GMAPick2;
+
+GMAPick3:
+set $LaW3,rand (1,42);
+if ($LaW3 == $LaW2) goto GMAPick3;
+if ($LaW3 == $LaW1) goto GMAPick3;
+
+GMAPick4:
+set $LaW4,rand (1,42);
+if ($LaW4 == $LaW2) goto GMAPick4;
+if ($LaW4 == $LaW1) goto GMAPick4;
+if ($LaW4 == $LaW3) goto GMAPick4;
+
+GMAPick5:
+set $LaW5,rand (1,42);
+if ($LaW5 == $LaW1) goto GMAPick5;
+if ($LaW5 == $LaW2) goto GMAPick5;
+if ($LaW5 == $LaW3) goto GMAPick5;
+if ($LaW5 == $LaW4) goto GMAPick5;
+
+GMAPick6:
+set $LaW6,rand (1,42);
+if ($LaW6 == $LaW1) goto GMAPick6;
+if ($LaW6 == $LaW2) goto GMAPick6;
+if ($LaW6 == $LaW3) goto GMAPick6;
+if ($LaW6 == $LaW4) goto GMAPick6;
+if ($LaW6 == $LaW5) goto GMAPick6;
+
+// BROADCASTS DRAW
+LA_Broadcast:
+Announce "Lottery: Welcome to the special GM's 6/42 Lotto draw!",8;
+Announce "The numbers are as follows: [" + $LaW1 + "] [" + $LaW2 + "] [" + $LaW3 + "] [" + $LaW4 + "] [" + $LaW5 + "] [" + $LaW6 + "]",8;
+Announce "Congratulations to the winners!",8;
+
+// GENERATES DRAW ID CODE
+LA_GenID:
+set $LaID2,$LaID;
+// SETS TOMORROW'S ID NUMBER
+set $LaID,rand (100000,999999);
+close;
+
+// SETS DRAW TO RIGGED NUMBERS
+LA_Rigged_Draw:
+set $LaW1,$LaR1;
+set $LaW2,$LaR2;
+set $LaW3,$LaR3;
+set $LaW4,$LaR4;
+set $LaW5,$LaR5;
+set $LaW6,$LaR6;
+set $LA_Rigged,0;
+goto LA_Broadcast;
+
+// ALLOWS GM TO DO A RIGGED DRAW
+LA_GM_Rig:
+mes "[Lottery]";
+mes "Please pick your numbers (1-42):";
+set $LaR1,0;
+set $LaR2,0;
+set $LaR3,0;
+set $LaR4,0;
+set $LaR5,0;
+set $LaR6,0;
+GMaInput1:
+Input $LaR1;
+if ($LaR1 < 1 || $LaR1 > 42) goto GMaInput1;
+mes $LaR1;
+GMaInput2:
+Input $LaR2;
+if ($LaR2 < 1 || $LaR2 > 42) goto GMaInput2;
+if ($LaR2 == $LaR1) goto GMaInput2;
+mes $LaR2;
+GMaInput3:
+Input $LaR3;
+if ($LaR3 < 1 || $LaR3 > 42) goto GMaInput3;
+if ($LaR3 == $LaR1) goto GMaInput3;
+if ($LaR3 == $LaR2) goto GMaInput3;
+mes $LaR3;
+GMaInput4:
+Input $LaR4;
+if ($LaR4 < 1 || $LaR4 > 42) goto GMaInput4;
+if ($LaR4 == $LaR1) goto GMaInput4;
+if ($LaR4 == $LaR2) goto GMaInput4;
+if ($LaR4 == $LaR3) goto GMaInput4;
+mes $LaR4;
+GMaInput5:
+Input $LaR5;
+if ($LaR5 < 1 || $LaR5 > 42) goto GMaInput5;
+if ($LaR5 == $LaR1) goto GMaInput5;
+if ($LaR5 == $LaR2) goto GMaInput5;
+if ($LaR5 == $LaR3) goto GMaInput5;
+if ($LaR5 == $LaR4) goto GMaInput5;
+mes $LaR5;
+GMaInput6:
+Input $LaR6;
+if ($LaR6 < 1 || $LaR6 > 42) goto GMaInput6;
+if ($LaR6 == $LaR1) goto GMaInput6;
+if ($LaR6 == $LaR2) goto GMaInput6;
+if ($LaR6 == $LaR3) goto GMaInput6;
+if ($LaR6 == $LaR4) goto GMaInput6;
+if ($LaR6 == $LaR5) goto GMaInput6;
+mes $LaR6;
+next;
+mes "[Lottery]";
+mes "Lottery rigged for next draw.";
+set $LA_Rigged,1;
+close;
+}
+
+prontera,164,196,5	duplicate(olottery)	6/42 Lotto Teller	816

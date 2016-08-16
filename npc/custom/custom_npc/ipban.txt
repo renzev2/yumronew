@@ -1,0 +1,48 @@
+// ========================================================
+// Ban IP Script
+// =-=-=-= Visit =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// www.finalro.com.br
+// =-=-=-= Version=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// v1.0
+// =-=-=-= Npc By =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
+// Yoh Asakura - yoh-asakura-cronus@live.com
+// ========================================================
+prt_in,38,104,6	script	IP Ban	700,{
+
+    if(getgmlevel()<99) goto L_lvl; 
+    mes "[IP Ban]";
+    mes "What would you like to do?";
+    menu "Ban IP",L_yes,"Remove Banned IP",L_remove,"Nothing, thanks.",L_no;
+    
+L_yes:    
+    input .@ipbannumber$;
+    mes "What's the reason to Ban this IP?";
+    next;
+    input .@ipbanreason$;
+    query_sql "INSERT INTO ipbanlist (list,btime,rtime,reason) VALUES ('"+.@ipbannumber$+"','"+gettime(7)+"-"+gettime(6)+"-"+gettime(5)+" "+gettime(3)+":"+gettime(2)+":"+gettime(1)+"','2099-01-01 00:00:00','"+.@ipbanreason$+"')";
+    mes "[IP Ban]";    
+    mes "Done. The IP has been banned!.";    
+    close;
+    
+L_remove:
+    input .@ipbannumber$;
+    query_sql "DELETE FROM `ipbanlist` WHERE `list` = '"+.@ipbannumber$+"'";
+    mes "The Banned IP has been Removed.";    
+    close;
+
+L_no:
+    mes "[IP Ban]";    
+    mes "Bye!";
+    close;
+
+L_lvl:
+    mes "[IP Ban]";    
+    mes "Oh! Sorry, but you don't have access to this NPC!";
+    close;
+}
+
+lhz_in01.gat	mapflag	noteleport
+lhz_in01.gat	mapflag	nowarp
+lhz_in01.gat	mapflag	nowarpto
+lhz_in01.gat	mapflag	nomemo
+lhz_in01.gat	mapflag	nobranch
