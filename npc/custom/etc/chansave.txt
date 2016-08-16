@@ -1,0 +1,248 @@
+//This is just my expiremental script 
+//I just use this for practicing 
+//and applying some idea that come up to my mind
+//Im just a noob guys so sorry if this is not that good
+//as other script like Euphy's
+// please also visit http://pspcheatdb.blogspot.com/p/ragnarok-battle-offline.html
+//THANKS I Hope you like this script even a little
+
+
+prontera,140,182,5	script	1Bro Menu	811,{
+set @Cstype,0;
+set @kaf,rand(1,9);
+cutin "kafra_0"+@kaf+"",2;
+
+CMAIN:	
+		mes "[^FF0000Kafra Corp.^000000]";
+		mes "^0000FF" + strcharinfo(0) + "^000000";
+		mes "What do you want me to do?";
+		if (getcharid(2))goto CGMAIN;
+		menu "^0000FFSave Point",CSYES,"^00FF00Auction",CAuctn,"^0000FFOpen Storage",CSTORAGE,"^0000FFMonster Info",CSMOB,"^0000FFChange Night and Day^000000",CNAD,"Exit",CSNO;
+
+CGMAIN:
+		menu "^0000FFSave Point",CSYES,"^00FF00Auction",CAuctn,"^0000FFOpen Storage",CSTORAGE,"^FF0000Open Guild Storage",CGSTORAGE,"^0000FFMonster Info",CSMOB,"^0000FFChange Night and Day^000000",CNAD,"Exit",CSNO;
+
+CNAD:
+		menu "^0000FFDay",CDAY,"^FF0000Night^000000",CNIGHT,"Main",CMAIN;
+
+CSSMP:
+		set $Monavail,($Monavail + 1);
+		mes "Thank You! ^0000FF" + strcharinfo(0) + "^000000 ";
+		mes "Please come back after an hour to get a new monster";
+		cutin "",255;
+		summon strmobinfo(1,@Mobid),@Mobid,99999999;
+
+CSMOB:
+		menu "^0000FFAll Monster",CSRMOB,"^0000FFHomunculus Evolver^000000",HMEV,"Main",CMAIN;
+	
+	HMEV:
+		
+		next;
+		if (gethominfo(6) < 99) goto HMNV;
+		homevolution;
+		mes "Do you want to Evolve to ^0000FFHomunculus S^000000?";
+		menu "^0000FFYes",HMEVS,"^0000FFNo^000000",CMAIN;
+		close;
+	HMEVS:
+		morphembryo;
+			if (countitem(6415) == 0)goto HMSNV;
+			mes "Choose from the different types of ^0000FFHomunculus S^000000.";
+			next;
+			switch(select("Eira:Sera:Dieter:Bayeri:Eleanor")) {
+			case 1:
+				cutin "Mer_Eira_Card",3;
+				set .@Homunculus,6048; //MER_EIRA
+				goto HMQ;
+			case 2:
+				cutin "Mer_Sera_Card",3;
+				set .@Homunculus,6050; //MER_SERA
+				goto HMQ;
+			case 3:
+				cutin "Mer_Dieter_Card",3;
+				set .@Homunculus,6051; //MER_DIETER
+				goto HMQ;
+			case 4:
+				cutin "Mer_Bayeri_Card",3;
+				set .@Homunculus,6049; //MER_BAYERI
+				goto HMQ;
+			case 5:
+				cutin "Mer_Eleanor_Card",3;
+				set .@Homunculus,6052; //MER_ELEANOR
+				goto HMQ;
+				}
+		HMQ:
+			mes "Are you sure?";
+			next;
+			if(select("Yes.:No.") == 2) {
+				cutin "",255;
+				playbgm "33.mp3"; // Yuna Song
+				mes "I see.";
+				mes "Give it more time to think.";
+				close;
+			}
+			cutin "",255;
+			mes "Excellent!";
+			mes "Let's get on with it.";
+			next;
+			specialeffect2 EF_BASH;
+			mes "Now focus~!";
+			mes "You... need...";
+			mes "... concentration.";
+			next;
+			specialeffect2 EF_PROVIDENCE;
+			mes "Good. Almost done!";
+			next;
+			specialeffect2 EF_SUI_EXPLOSION;
+			hommutate .@Homunculus;
+			close;
+
+	HMNV:
+		next;
+		mes "Please come back when your Homunculus is ^0000FFLevel 99^000000";
+		goto CSMOB;
+
+	HMSNV:
+		next;
+		mes "Please come back with ^0000FFStrange Embryo^000000";
+		goto CSMOB;
+
+	CSRMOB:
+		next;
+		mes "Input Monster Id: 1001 to 2380";
+		input @Mobid;
+		if(@Mobid < 1001 || @Mobid > 2380)goto CSRMOB;
+		goto CSMONs;
+	
+
+	CSMONs:	
+		next;
+		strmobinfo((@Cstype+1),@Mobid);
+		mes "Monster Number: ^0000FF"+ @Mobid +"^000000";
+		mes "Monster Name: ^0000FF" + strmobinfo((@Cstype+1),@Mobid) + "^000000";
+		mes "Monster Level: ^0000FF" + strmobinfo((@Cstype+3),@Mobid) + "^000000";
+		mes "Monster Max HP: ^0000FF" + strmobinfo((@Cstype+4),@Mobid) + "^000000";
+		mes "Monster Max SP: ^0000FF" + strmobinfo((@Cstype+5),@Mobid) + "^000000";
+		mes "Base Exp. Reward: ^0000FF" + strmobinfo((@Cstype+6),@Mobid) + "^000000";
+		mes "Job Exp. Reward: ^0000FF" + strmobinfo((@Cstype+7),@Mobid) + "^000000";
+		set @Cstype,0;
+		if(@Mobid < 1002 && $Monavail < 3)goto ACSMNEXT;
+		if(@Mobid < 1002)goto CSMNEXT;
+		if(@Mobid > 2379 && $Monavail < 3)goto ACSMBACK;
+		if(@Mobid > 2379)goto CSMBACK;
+		if($Monavail < 3)goto ACSMBN;
+		goto CSMBN;
+		close;
+
+CSMNEXT:
+		menu "^FF0000Next^000000",CSNEXT,"Main",CMAIN;
+		
+CSMBN:
+		menu "^0000FFBack",CSBACK,"^FF0000Next^000000",CSNEXT,"Main",CMAIN;
+	
+CSMBACK:
+		menu "^0000FFBack^000000",CSBACK,"Main",CMAIN;
+
+ACSMNEXT:
+		menu "^FF0000Next",ACSNEXT,"^00FF00Summon^000000",CSSMP,"Main",CMAIN;
+		
+ACSMBN:
+		menu "^0000FFBack",ACSBACK,"^FF0000Next",ACSNEXT,"^00FF00Summon^000000",CSSMP,"Main",CMAIN;
+	
+ACSMBACK:
+		menu "^0000FFBack",ACSBACK,"^00FF00Summon^000000",CSSMP,"Main",CMAIN;
+
+	
+	CSNEXT:
+		set @Mobid,(@Mobid+1);
+		goto CSMONs;
+		close;
+	
+	CSBACK:
+		set @Mobid,(@Mobid-1);
+		goto CSMONs;
+		close;
+	ACSNEXT:
+		set @Mobid,(@Mobid+1);
+		goto CSMONs;
+		close;
+	
+	ACSBACK:
+		set @Mobid,(@Mobid-1);
+		goto CSMONs;
+		close;
+
+	
+CSYES:
+	mes gettimestr("%Y-%m/%d %H:%M:%S",21);
+	mes "^0000FF" + strcharinfo(0) + "^000000";
+	mes "saved...";
+	save "prontera", 155, 182;
+	close2;
+	cutin "",255;
+	end;
+
+CSTORAGE:	
+	mes "I will now open your storage for you";
+	close2;
+	cutin "",255;
+	openstorage;
+	end;
+	
+CGSTORAGE:
+	mes "I will now open your guild storage for you";
+	close2;
+	cutin "",255;
+	guildopenstorage;
+	end;
+
+CAuctn:
+	mes "See what in auction";
+	close2;
+	cutin "",255;
+	OpenAuction;
+	end;
+	
+
+
+CDAY:	
+	if (isday()) goto CADAY;
+	day;
+	close2;
+	cutin "",255;
+	end;
+CNIGHT:
+	if (isnight()) goto CANIGHT;
+	night;
+	close2;
+	cutin "",255;
+	end;
+CADAY:
+	mes "^FF0000but its daytime already!!^000000";
+	emotion 23;
+	close2;
+	cutin "",255;
+	end;
+
+CANIGHT:
+	mes "^FF0000but its nighttime already!!^000000";
+	emotion 23;
+	close2;
+	cutin " ",255;
+	end;
+
+CSNO:
+	mes "Thank you! ^0000FF" + strcharinfo(0) + "^000000 come again";
+	close2;
+	cutin "",255;
+	end;
+
+CSTRYA:
+	next;
+	mes "^0000FF" + strcharinfo(0) + "^000000 Do you want to try again?";
+	menu "^0000FFYES",CSMOB,"^FF0000NO^000000",CSNO,"Back",CMAIN;
+	close2;
+	cutin "",255;
+	end; 
+	
+    } 
+

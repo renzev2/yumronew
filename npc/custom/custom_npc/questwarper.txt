@@ -1,0 +1,15 @@
+//customize quest warper by jaco
+prontera.gat,164,169,4	script	Quest Warper	903,{
+		shop:	warp "mall" ,44,78;
+              	OnInit:
+                waitingroom "Quest Room",0;
+                end;
+}
+
+//exit
+mall,49,79,4	script	Quest Exit	903,{
+		shop:	warp "prontera" ,156,191;
+                OnInit:
+                waitingroom "Quest Exit",0;
+                end;
+}

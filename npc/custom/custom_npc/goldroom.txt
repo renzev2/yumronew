@@ -1,0 +1,49 @@
+//gold room by jaco
+prontera,139,172,6	script	Gold Room Manager	861,{
+	mes "[ Gold Room Manager ]";
+	mes "Hello, ";
+	mes "I know a where you can earn money! hehe";
+	mes "I can warp you there if you want?";
+	mes "You could get rich if your lucky enough.";
+	next;
+	switch(select("Warp me there:Not Now")) {
+		Case 1:
+			mes "[ Gold Room Manager ]";	
+			mes "So you have decide to go there.";
+			mes "A wise decision.";	
+			mes "I will warp you there at once!";
+			next;
+			mes "[ Gold Room Manager ]";	
+			mes "See ya.";
+			close2;			
+			warp "ordeal_1-1",149,146; 	
+			end;
+		Case 2:
+			mes "[ Gold Room Manager ]";	
+			mes "Owh....";
+			mes "Nevermind..since it is your decision.";
+			mes "It is all up to you.";
+			mes "Come back to me if you changed your mind.";
+			close;
+OnInit:
+	waitingroom "Gold Room",0;
+	end;
+
+	}
+}
+
+
+
+
+//-------------------------MONSTER SPAWN--------------------------------------------------------------------
+
+
+ordeal_1-1,0,0,0,0	monster	Gold Holder	1110,1000,0,0,0
+
+ordeal_1-1,150,150,6	script	Gold Room Exit	861,{
+	warp "prontera",156,191;
+OnInit:
+	waitingroom "Gold Room Exit",0;
+	end;
+
+}

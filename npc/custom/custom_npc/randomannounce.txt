@@ -1,0 +1,24 @@
+// Show 1 random message every .Time minutes
+-	script	News	-1,{
+OnInit:
+	set .Time,15;  // Announce every x Minutes.
+	setarray .News$[0], // Random Message to be Announced
+		"[OverkillRO]: Respect all the players specially the GMs.",
+		"[OverkillRO]: Please report all bugs that you'll find immediately by using @request.",
+		"[OverkillRO]: Do not impersonate any player or GMs on the server.",
+		"[OverkillRO]: GMs won't ask for your username and password.",
+		"[OverkillRO]: Join our automated event to earn credits.",
+		"[OverkillRO]: Remember that your Account and Items are your responsibility.",
+		"[OverkillRO]: Please report illegal activities that you will see using @request.",
+		"[OverkillRO]: For GMs assistance use @request.",
+		"[OverkillRO]: TIP: If you don't have zeny for Private MVP Room use the older MVP room.";	
+	set .msgs, getarraysize(.News$);
+
+OnTimer60000:
+	initnpctimer;
+	set .Counter, .Counter + 1;
+	if (.Counter >= .Time) {
+		announce .News$[rand(.msgs)], bc_all;
+		set .Counter, 0;
+	}
+}
